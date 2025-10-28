@@ -429,5 +429,44 @@ $(document).ready(function () {
       });
     });
   }, 100);
+
+  // Gallery scroll animation functionality
+  function initGalleryAnimations() {
+    const galleryRows = document.querySelectorAll('.gallery-row');
+    
+    // Create intersection observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const row = entry.target;
+          const items = row.querySelectorAll('.gallery-item');
+          
+          // Add animate class to the row
+          row.classList.add('animate');
+          
+          // Add animate class to each item with staggered delay
+          items.forEach((item, index) => {
+            setTimeout(() => {
+              item.classList.add('animate');
+            }, index * 100); // 100ms delay between each item
+          });
+          
+          // Stop observing this row after it's animated
+          observer.unobserve(row);
+        }
+      });
+    }, {
+      threshold: 0.2, // Trigger when 20% of the row is visible
+      rootMargin: '0px 0px -50px 0px' // Trigger slightly before the element comes into view
+    });
+
+    // Start observing each gallery row
+    galleryRows.forEach(row => {
+      observer.observe(row);
+    });
+  }
+
+  // Initialize gallery animations
+  initGalleryAnimations();
 });
 
