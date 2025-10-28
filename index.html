@@ -37,6 +37,9 @@
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
 
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
     <!-- Custom Lightbox Styles -->
     <style>
       .lb-data .lb-caption {
@@ -237,10 +240,30 @@
         </div>
       </div>
 
+      
+      
+      <!-- WhatsApp Floating Button -->
+      <a
+        href="#"
+        class="fixed bottom-20 right-6 bg-[#25D366] p-3 rounded-full shadow-lg hover:bg-green-600"
+      >
+        <svg
+          aria-hidden="true"
+          class="text-white w-6 h-6"
+          viewBox="0 0 448 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill="currentColor"
+            d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"
+          ></path>
+        </svg>
+      </a>
       <!-- Back to Top Button -->
+
       <button
         id="backToTop"
-        class="fixed bottom-20 right-6 bg-[#0473A5] p-3 rounded-full shadow-lg hover:bg-[#046591] hover:-translate-y-1 transition-all duration-300 ease-in-out transform opacity-0 invisible"
+        class="fixed bottom-6 right-6 bg-[#0473A5] p-3 rounded-full shadow-lg hover:bg-[#046591] hover:-translate-y-1 transition-all duration-300 ease-in-out transform opacity-0 invisible"
       >
         <svg
           aria-hidden="true"
@@ -259,23 +282,6 @@
         </svg>
       </button>
 
-      <!-- WhatsApp Floating Button -->
-      <a
-        href="#"
-        class="fixed bottom-6 right-6 bg-[#25D366] p-3 rounded-full shadow-lg hover:bg-green-600"
-      >
-        <svg
-          aria-hidden="true"
-          class="text-white w-6 h-6"
-          viewBox="0 0 448 512"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill="currentColor"
-            d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"
-          ></path>
-        </svg>
-      </a>
     </section>
 
     <!-- Popular Ladakh Tour Packages Section -->
@@ -1143,7 +1149,7 @@
               <!-- Call to Action Button -->
               <div class="flex items-start w-full pl-6">
                 <button
-                  class="bg-[#facc15] text-white font-bold px-8 py-4 rounded-md flex items-center space-x-3 hover:bg-[#046591] transition-colors duration-300"
+                  class="callback-btn bg-[#facc15] text-white font-bold px-8 py-4 rounded-md flex items-center space-x-3 hover:bg-[#046591] transition-colors duration-300"
                 >
                   <i data-feather="send" class="w-5 h-5"></i>
                   <span>REQUEST A CALLBACK</span>
@@ -1160,7 +1166,7 @@
       <div class="max-w-7xl mx-auto px-4">
         <!-- Section Header -->
         <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold text-blue-900 mb-4">
+          <h2 class="text-3xl md:text-4xl font-bold text-[#0473A5] mb-4">
             Not just packages!
           </h2>
           <p class="text-lg text-gray-600">
@@ -1195,23 +1201,23 @@
           </div>
 
           <!-- Row 2 - 3 Equal + 1 Tall -->
-          <div class="flex flex-wrap md:flex-nowrap gap-4 mb-4">
-            <div class="w-full md:w-1/4 aspect-square">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+            <div class="aspect-square">
               <a href="images/gallery5.webp" data-lightbox="gallery" data-title="Leh Market">
                 <img src="images/gallery5.webp" alt="Leh Market" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
               </a>
             </div>
-            <div class="w-full md:w-1/4 aspect-square">
+            <div class="aspect-square">
               <a href="images/gallery6.webp" data-lightbox="gallery" data-title="Traveler Portrait">
                 <img src="images/gallery6.webp" alt="Traveler Portrait" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
               </a>
             </div>
-            <div class="w-full md:w-1/4 aspect-square">
+            <div class="aspect-square">
               <a href="images/gallery7.webp" data-lightbox="gallery" data-title="Bactrian Camels">
                 <img src="images/gallery7.webp" alt="Bactrian Camels" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
               </a>
             </div>
-            <div class="w-full md:w-1/4 aspect-[4/2]">
+            <div class="aspect-square md:aspect-[4/5]">
               <a href="images/gallery8.webp" data-lightbox="gallery" data-title="Leh Bazaar Street">
                 <img src="images/gallery8.webp" alt="Leh Bazaar Street" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
               </a>
@@ -1219,23 +1225,23 @@
           </div>
 
           <!-- Row 3 - 3 Equal + 1 Tall -->
-          <div class="flex flex-wrap md:flex-nowrap gap-4 mb-4">
-            <div class="w-full md:w-1/4 aspect-square">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+            <div class="aspect-square">
               <a href="images/gallery9.webp" data-lightbox="gallery" data-title="Salt Mountains">
                 <img src="images/gallery9.webp" alt="Salt Mountains" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
               </a>
             </div>
-            <div class="w-full md:w-1/4 aspect-square">
+            <div class="aspect-square">
               <a href="images/gallery10.webp" data-lightbox="gallery" data-title="Pangong Lake Blue">
                 <img src="images/gallery10.webp" alt="Pangong Lake Blue" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
               </a>
             </div>
-            <div class="w-full md:w-1/4 aspect-square">
+            <div class="aspect-square">
               <a href="images/gallery11.webp" data-lightbox="gallery" data-title="Mountain Valley">
                 <img src="images/gallery11.webp" alt="Mountain Valley" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
               </a>
             </div>
-            <div class="w-full md:w-1/4 aspect-[4/5]">
+            <div class="aspect-square md:aspect-[4/5]">
               <a href="images/gallery12.webp" data-lightbox="gallery" data-title="Highland Adventure">
                 <img src="images/gallery12.webp" alt="Highland Adventure" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
               </a>
@@ -1243,23 +1249,23 @@
           </div>
 
           <!-- Row 4 - 3 Equal + 1 Tall -->
-          <div class="flex flex-wrap md:flex-nowrap gap-4 mb-4">
-            <div class="w-full md:w-1/4 aspect-square">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+            <div class="aspect-square">
               <a href="images/gallery13.webp" data-lightbox="gallery" data-title="Mountain Biker on Highway">
                 <img src="images/gallery13.webp" alt="Mountain Biker on Highway" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
               </a>
             </div>
-            <div class="w-full md:w-1/4 aspect-square">
+            <div class="aspect-square">
               <a href="images/gallery14.webp" data-lightbox="gallery" data-title="Biker on Mountain Road">
                 <img src="images/gallery14.webp" alt="Biker on Mountain Road" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
               </a>
             </div>
-            <div class="w-full md:w-1/4 aspect-square">
+            <div class="aspect-square">
               <a href="images/gallery15.webp" data-lightbox="gallery" data-title="Milestone Adventure">
                 <img src="images/gallery15.webp" alt="Milestone Adventure" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
               </a>
             </div>
-            <div class="w-full md:w-1/4 aspect-[4/5]">
+            <div class="aspect-square md:aspect-[4/5]">
               <a href="images/gallery16.webp" data-lightbox="gallery" data-title="Prayer Flags Mountain View">
                 <img src="images/gallery16.webp" alt="Prayer Flags Mountain View" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
               </a>
@@ -1267,23 +1273,23 @@
           </div>
 
           <!-- Row 5 - 3 Equal + 1 Tall -->
-          <div class="flex flex-wrap md:flex-nowrap gap-4">
-            <div class="w-full md:w-1/4 aspect-square">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+            <div class="aspect-square">
               <a href="images/gallery17.webp" data-lightbox="gallery" data-title="Golden Valley Landscape">
                 <img src="images/gallery17.webp" alt="Golden Valley Landscape" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
               </a>
             </div>
-            <div class="w-full md:w-1/4 aspect-square">
+            <div class="aspect-square">
               <a href="images/gallery18.webp" data-lightbox="gallery" data-title="Ancient Monastery">
                 <img src="images/gallery18.webp" alt="Ancient Monastery" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
               </a>
             </div>
-            <div class="w-full md:w-1/4 aspect-square">
+            <div class="aspect-square">
               <a href="images/gallery19.webp" data-lightbox="gallery" data-title="Desert Terrain">
                 <img src="images/gallery19.webp" alt="Desert Terrain" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
               </a>
             </div>
-            <div class="w-full md:w-1/4 aspect-[4/5]">
+            <div class="aspect-square md:aspect-[4/5]">
               <a href="images/gallery20.webp" data-lightbox="gallery" data-title="Mountain Lake Vista">
                 <img src="images/gallery20.webp" alt="Mountain Lake Vista" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
               </a>
@@ -1291,35 +1297,30 @@
           </div>
 
 
-           <!-- Row 6 - 3 Equal + 1 Tall -->
-           <div class="flex flex-wrap md:flex-nowrap gap-4 mt-4">
-            <div class="w-full md:w-1/4 aspect-square">
+           <!-- Row 6 - 3 Images -->
+           <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+            <div class="aspect-square">
               <a href="images/gallery21.webp" data-lightbox="gallery" data-title="Golden Valley Landscape">
                 <img src="images/gallery21.webp" alt="Golden Valley Landscape" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
               </a>
             </div>
-            <div class="w-full md:w-1/4 aspect-square">
+            <div class="aspect-square">
               <a href="images/gallery22.webp" data-lightbox="gallery" data-title="Ancient Monastery">
                 <img src="images/gallery22.webp" alt="Ancient Monastery" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
               </a>
             </div>
-            <div class="w-full md:w-1/4 aspect-square">
+            <div class="aspect-square">
               <a href="images/gallery23.webp" data-lightbox="gallery" data-title="Desert Terrain">
                 <img src="images/gallery23.webp" alt="Desert Terrain" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
               </a>
             </div>
-            <!-- <div class="w-full md:w-1/4 aspect-[4/5]">
-              <a href="images/gallery.webp" data-lightbox="gallery" data-title="Mountain Lake Vista">
-                <img src="images/gallery20.webp" alt="Mountain Lake Vista" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
-              </a>
-            </div> -->
           </div>
         </div>
 
         <!-- Call to Action Button -->
         <div class="text-center">
           <button
-            class="bg-[#facc15] text-white font-bold px-8 py-4 rounded-md flex items-center space-x-3 mx-auto hover:bg-[#046591] transition-colors duration-300"
+            class="callback-btn bg-[#facc15] text-white font-bold px-8 py-4 rounded-md flex items-center space-x-3 mx-auto hover:bg-[#046591] transition-colors duration-300"
           >
             <i data-feather="send" class="w-5 h-5"></i>
             <span>REQUEST A CALLBACK</span>
@@ -1330,7 +1331,7 @@
 
     <!-- WhatsApp Header Bar -->
     <div class="bg-[#0473A5] py-3 px-4">
-      <div class="max-w-5xl mx-auto flex items-center justify-between">
+      <div class="max-w-5xl mx-auto flex items-center justify-between flex-col md:flex-row gap-4">
         <span class="text-white font-bold">Instant Inquiry on WhatsApp</span>
         <button
           class="bg-[#25D366] text-white font-bold px-4 py-2 rounded-md flex items-center space-x-2 hover:bg-green-600"
@@ -1356,10 +1357,10 @@
       <div class="max-w-7xl mx-auto px-4">
         <!-- Section Title -->
         <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold text-blue-900 mb-2">
+          <h2 class="text-3xl md:text-4xl font-bold text-[#0473A5] mb-2">
             Why People Choose Us Reviews
           </h2>
-          <h3 class="text-3xl md:text-4xl font-bold text-blue-900">
+          <h3 class="text-3xl md:text-4xl font-bold text-[#0473A5]">
             That Matter
           </h3>
         </div>
@@ -1369,7 +1370,7 @@
           <!-- Custom Navigation Arrows -->
           <button
             id="prevBtn"
-            class="absolute left-[-25px] top-1/3 transform -translate-y-1/2 z-10 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white w-12 h-12 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
+            class="absolute left-[-25px] top-1/3 transform -translate-y-1/2 z-10 bg-[#0473A5] hover:from-blue-700 hover:to-blue-800 text-white w-12 h-12 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
           >
             <svg
               class="w-6 h-6 transform group-hover:scale-110 transition-transform duration-200"
@@ -1388,7 +1389,7 @@
 
           <button
             id="nextBtn"
-            class="absolute right-[-25px] top-1/3 transform -translate-y-1/2 z-10 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white w-12 h-12 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
+            class="absolute right-[-25px] top-1/3 transform -translate-y-1/2 z-10 bg-[#0473A5] hover:from-blue-700 hover:to-blue-800 text-white w-12 h-12 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
           >
             <svg
               class="w-6 h-6 transform group-hover:scale-110 transition-transform duration-200"
@@ -1437,12 +1438,11 @@
                     class="w-4 h-4 text-blue-500"
                   ></i>
                 </div>
-                <p class="text-gray-700 mb-3">
-                  Excellent service and well-organized trip. The team was very
-                  professional and made our Ladakh journey memorable...
+                <p id="review-text-1" class="text-gray-700 mb-3">
+                  Excellent service and well-organized trip. The team was very professional and made our Ladakh journey memorable. From the initial planning stages to the final day of our trip, every detail was meticulously handled. The guides were knowledgeable about local culture and history, always ensuring our safety while maximizing our adventure experience. The accommodations were comfortable and well-located, and the transportation was reliable throughout the entire journey. I would highly recommend this team for anyone planning to explore the beautiful landscapes of Ladakh.
                 </p>
-                <a href="#" class="text-sm text-gray-500 hover:text-blue-600"
-                  >Read more</a
+                <button id="toggle-btn-1" class="text-sm text-gray-500 hover:text-blue-600 hidden focus:outline-none"
+                  >view more</button
                 >
               </div>
             </div>
@@ -1477,13 +1477,11 @@
                     class="w-4 h-4 text-blue-500"
                   ></i>
                 </div>
-                <p class="text-gray-700 mb-3">
-                  Amazing experience! The guides were knowledgeable and the
-                  accommodations were perfect. Highly recommended for anyone
-                  planning a Ladakh trip.
+                <p id="review-text-2" class="text-gray-700 mb-3">
+                  Amazing experience! The guides were knowledgeable and the accommodations were perfect. Highly recommended for anyone planning a Ladakh trip. The entire journey was seamlessly organized from start to finish. Our guide was not only experienced but also passionate about sharing the rich culture and breathtaking beauty of Ladakh. Every location we visited was carefully selected to provide the most authentic and memorable experience. The local cuisine recommendations were spot-on, and the cultural interactions arranged by the team gave us deep insights into the local way of life.
                 </p>
-                <a href="#" class="text-sm text-gray-500 hover:text-blue-600"
-                  >Read more</a
+                <button id="toggle-btn-2" class="text-sm text-gray-500 hover:text-blue-600 hidden focus:outline-none"
+                  >view more</button
                 >
               </div>
             </div>
@@ -1518,13 +1516,11 @@
                     class="w-4 h-4 text-blue-500"
                   ></i>
                 </div>
-                <p class="text-gray-700 mb-3">
-                  Outstanding service from start to finish. The team handled
-                  everything perfectly and made our family trip to Ladakh
-                  unforgettable...
+                <p id="review-text-3" class="text-gray-700 mb-3">
+                  Outstanding service from start to finish. The team handled everything perfectly and made our family trip to Ladakh unforgettable. As a family with young children, we had specific concerns about altitude and accessibility, but the team addressed every worry with professional expertise. They provided age-appropriate activities and ensured that our itinerary was family-friendly while still capturing the essence of Ladakh's natural beauty. The patience and care shown by our guides made this trip educational and enjoyable for every family member.
                 </p>
-                <a href="#" class="text-sm text-gray-500 hover:text-blue-600"
-                  >Read more</a
+                <button id="toggle-btn-3" class="text-sm text-gray-500 hover:text-blue-600 hidden focus:outline-none"
+                  >view more</button
                 >
               </div>
             </div>
@@ -1559,13 +1555,11 @@
                     class="w-4 h-4 text-blue-500"
                   ></i>
                 </div>
-                <p class="text-gray-700 mb-3">
-                  Perfect organization and amazing local insights. The team made
-                  our Ladakh adventure smooth and memorable. Will definitely
-                  book again!
+                <p id="review-text-4" class="text-gray-700 mb-3">
+                  Perfect organization and amazing local insights. The team made our Ladakh adventure smooth and memorable. Will definitely book again! The attention to detail was remarkable - from pre-trip briefings about weather conditions and packing essentials to on-ground support whenever needed. The local connections they had helped us experience authentic Ladakhi hospitality in remote villages that most tourists never get to see. The photography spots recommended by our guide resulted in some of the most stunning shots we've ever captured.
                 </p>
-                <a href="#" class="text-sm text-gray-500 hover:text-blue-600"
-                  >Read more</a
+                <button id="toggle-btn-4" class="text-sm text-gray-500 hover:text-blue-600 hidden focus:outline-none"
+                  >view more</button
                 >
               </div>
             </div>
@@ -1600,13 +1594,11 @@
                     class="w-4 h-4 text-blue-500"
                   ></i>
                 </div>
-                <p class="text-gray-700 mb-3">
-                  Exceptional service and attention to detail. The guides were
-                  friendly and knowledgeable. Our Ladakh trip exceeded all
-                  expectations!
+                <p id="review-text-5" class="text-gray-700 mb-3">
+                  Exceptional service and attention to detail. The guides were friendly and knowledgeable. Our Ladakh trip exceeded all expectations! The team's commitment to sustainable tourism and respect for local communities was evident throughout our journey. They educated us about environmental conservation in the region while ensuring we experienced the raw beauty of the Himalayas responsibly. The emergency support system they had in place gave us confidence to explore remote areas safely. Every aspect of the trip, from logistics to cultural experiences, was handled with utmost professionalism.
                 </p>
-                <a href="#" class="text-sm text-gray-500 hover:text-blue-600"
-                  >Read more</a
+                <button id="toggle-btn-5" class="text-sm text-gray-500 hover:text-blue-600 hidden focus:outline-none"
+                  >view more</button
                 >
               </div>
             </div>
@@ -1621,7 +1613,7 @@
     <section id="faq" class="py-16 bg-gray-100">
       <div class="max-w-7xl mx-auto px-4">
         <h2
-          class="text-3xl md:text-4xl font-bold text-blue-900 text-center mb-8"
+          class="text-3xl md:text-4xl font-bold text-[#0473A5] text-center mb-8"
         >
           FAQ
         </h2>
@@ -1891,7 +1883,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <!-- Left Content Area -->
           <div class="p-8 lg:p-12 flex flex-col justify-center">
-            <h2 class="text-3xl md:text-3xl font-bold text-blue-900 mb-6">
+            <h2 class="text-3xl md:text-3xl font-bold text-[#0473A5] mb-6">
               Need Help in Your Ladakh Holiday Planning?
             </h2>
             <p class="text-lg text-gray-700 mb-8">
@@ -1988,11 +1980,14 @@
               within 24 hours.
             </p>
 
-            <form class="space-y-6 ">
-              <div >
+            <form id="contactForm" class="space-y-6">
+              <div>
                 <input
                   type="text"
+                  id="contactFirstName"
+                  name="firstName"
                   placeholder="Enter Your First Name"
+                  required
                   class="w-full px-4 py-3 bg-white text-gray-900 rounded-md border-0 focus:outline-none focus:ring-2 focus:ring-yellow-400"
                 />
               </div>
@@ -2000,7 +1995,10 @@
               <div>
                 <input
                   type="email"
+                  id="contactEmail"
+                  name="email"
                   placeholder="Email Address"
+                  required
                   class="w-full px-4 py-3 bg-white text-gray-900 rounded-md border-0 focus:outline-none focus:ring-2 focus:ring-yellow-400"
                 />
               </div>
@@ -2008,22 +2006,29 @@
               <div>
                 <input
                   type="tel"
+                  id="contactPhone"
+                  name="phone"
                   placeholder="Phone"
+                  required
                   class="w-full px-4 py-3 bg-white text-gray-900 rounded-md border-0 focus:outline-none focus:ring-2 focus:ring-yellow-400"
                 />
               </div>
 
               <div>
                 <textarea
+                  id="contactTripDetails"
+                  name="tripDetails"
                   placeholder="Enter trip details: travelers, dates, and duration."
                   rows="4"
+                  required
                   class="w-full px-4 py-3 bg-white text-gray-900 rounded-md border-0 focus:outline-none focus:ring-2 focus:ring-yellow-400 resize-none"
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                class="w-full bg-orange-500 text-white font-bold py-4 rounded-md hover:bg-orange-600 transition-colors duration-300"
+                id="contactSubmitBtn"
+                class="w-full bg-orange-500 text-white font-bold py-4 rounded-md hover:bg-orange-600 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 LET'S PLAN MY TRIP!
               </button>
@@ -2075,7 +2080,7 @@
 
         <div class="flex flex-col lg:flex-row h-full">
           <!-- Left Side - Image Panel -->
-          <div class="lg:w-1/2 relative  rounded-md flex items-center pl-5">
+          <div class="lg:w-1/2 relative  rounded-md hidden md:flex items-center pl-5">
             <img
               src="images/Pop-Up-Image (1).jpg"
               alt="Ladakh Adventure"
@@ -2089,11 +2094,14 @@
               Start Your Hassle-Free Trip Planning Today!
             </h2>
 
-            <form class="space-y-4">
+            <form id="tripForm" class="space-y-4">
               <div>
                 <input
                   type="text"
+                  id="firstName"
+                  name="firstName"
                   placeholder="Enter Your First Name"
+                  required
                   class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
@@ -2101,7 +2109,10 @@
               <div>
                 <input
                   type="email"
+                  id="email"
+                  name="email"
                   placeholder="Email Address"
+                  required
                   class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
@@ -2109,22 +2120,29 @@
               <div>
                 <input
                   type="tel"
+                  id="phone"
+                  name="phone"
                   placeholder="Phone"
+                  required
                   class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
 
               <div>
                 <textarea
+                  id="tripDetails"
+                  name="tripDetails"
                   placeholder="Enter trip details: travelers, dates, and duration."
                   rows="3"
+                  required
                   class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                class="w-[50%] bg-orange-500 text-white font-bold py-4 rounded-md hover:bg-orange-600 transition-colors duration-300"
+                id="submitBtn"
+                class="w-[50%] bg-orange-500 text-white font-bold py-4 rounded-md hover:bg-orange-600 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Let's Plan My Trip!
               </button>
@@ -2136,122 +2154,8 @@
 
     <!-- Scripts -->
     <script>
-      $(document).ready(function () {
-        // Initialize Feather Icons
-        feather.replace();
-
-        // Hero Background Slideshow
-        const images = [
-          "images/ladakh-nubra.webp",
-          "images/ladkh-k.webp",
-          "images/ladkh-turkh.webp",
-        ];
-
-        let index = 0;
-        let currentLayer = 1;
-        const $bg1 = $("#background-slideshow-1");
-        const $bg2 = $("#background-slideshow-2");
-
-        // Set initial image
-        $bg1.css("background-image", `url(${images[index]})`);
-
-        setInterval(() => {
-          index = (index + 1) % images.length;
-
-          if (currentLayer === 1) {
-            $bg2.css("background-image", `url(${images[index]})`);
-            $bg2.css("opacity", 1);
-            $bg1.css("opacity", 0);
-            currentLayer = 2;
-          } else {
-            $bg1.css("background-image", `url(${images[index]})`);
-            $bg1.css("opacity", 1);
-            $bg2.css("opacity", 0);
-            currentLayer = 1;
-          }
-        }, 4000);
-
-        // Initialize Owl Carousel
-        var owl = $(".owl-carousel").owlCarousel({
-          loop: true,
-          margin: 20,
-          nav: false, // Disable default navigation
-          dots: false,
-          autoplay: true,
-          autoplayTimeout: 5000,
-          autoplayHoverPause: true,
-          responsive: {
-            0: {
-              items: 1,
-            },
-            768: {
-              items: 2,
-            },
-            1024: {
-              items: 3,
-            },
-          },
-        });
-
-        // Custom Navigation
-        $("#nextBtn").click(function () {
-          owl.trigger("next.owl.carousel");
-        });
-
-        $("#prevBtn").click(function () {
-          owl.trigger("prev.owl.carousel");
-        });
-
-        // Modal Functions
-        function openModal() {
-          $("#tripModal").removeClass("hidden");
-          $("body").css("overflow", "hidden"); // Prevent background scrolling
-        }
-
-        function closeModal() {
-          $("#tripModal").addClass("hidden");
-          $("body").css("overflow", "auto"); // Restore scrolling
-        }
-
-        // Modal Event Listeners
-        $("#openModal").click(openModal);
-        $(".enquire-btn").click(openModal); // Add click event to all enquire buttons
-        $("#closeModal").click(closeModal);
-
-        // Close modal when clicking on overlay
-        $("#tripModal").click(function (e) {
-          if (e.target === this) {
-            closeModal();
-          }
-        });
-
-        // Close modal with Escape key
-        $(document).keydown(function (e) {
-          if (e.key === "Escape") {
-            closeModal();
-          }
-        });
-
-        // Back to Top Button Functionality
-        const $backToTopBtn = $("#backToTop");
-
-        // Show/hide button based on scroll position
-        $(window).scroll(function() {
-          if ($(window).scrollTop() > 300) {
-            $backToTopBtn.removeClass('opacity-0 invisible').addClass('opacity-100 visible');
-          } else {
-            $backToTopBtn.removeClass('opacity-100 visible').addClass('opacity-0 invisible');
-          }
-        });
-
-        // Scroll to top when button is clicked
-        $backToTopBtn.click(function() {
-          $('html, body').animate({
-            scrollTop: 0
-          }, 600);
-        });
-
-        // Lightbox Configuration
+      // Lightbox Configuration
+      $(document).ready(function() {
         lightbox.option({
           resizeDuration: 200,
           wrapAround: true,
@@ -2263,35 +2167,9 @@
           disableScrolling: true,
         });
       });
-
-      // FAQ Accordion Function (kept as global function for onclick attributes)
-      function toggleFAQ(id) {
-        const $content = $(`#content-${id}`);
-        const $icon = $(`#icon-${id}`);
-        const $faqItem = $content.parent();
-
-        if ($content.hasClass("hidden")) {
-          // Close all other FAQ items
-          $('[id^="content-"]').each(function() {
-            const $this = $(this);
-            if ($this.attr('id') !== `content-${id}`) {
-              $this.addClass("hidden");
-              $this.parent().removeClass("bg-white border-t-4 border-blue-500").addClass("bg-gray-100");
-              $(`#${$this.attr('id').replace("content-", "icon-")}`).text("+");
-            }
-          });
-
-          // Open current FAQ item
-          $content.removeClass("hidden");
-          $icon.text("−");
-          $faqItem.removeClass("bg-gray-100").addClass("bg-white border-t-4 border-blue-500");
-        } else {
-          // Close current FAQ item
-          $content.addClass("hidden");
-          $icon.text("+");
-          $faqItem.removeClass("bg-white border-t-4 border-blue-500").addClass("bg-gray-100");
-        }
-      }
     </script>
+    
+    <!-- Main JavaScript File -->
+    <script src="js/main.js"></script>
   </body>
 </html>
