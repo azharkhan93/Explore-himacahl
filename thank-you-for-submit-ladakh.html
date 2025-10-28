@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thank You - Ladakh Tour</title>
+    <link rel="stylesheet" href="styles/style.css" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Exo:ital,wght@0,100..900;1,100..900&family=Italiana&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Mozilla+Headline:wght@200..700&family=Mozilla+Text:wght@200..700&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Playwrite+MX+Guides&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body class="bg-gray-50" style="font-family: 'Josefin Sans', sans-serif">
+    <div
+      class="min-h-screen flex flex-col items-center justify-center gap-6 px-4 space-y-8"
+    >
+      <img
+        src="images/logo_dark.png"
+        alt="gR Travel Logo"
+        class="h-16 w-auto"
+      />
+
+      <h1 class="text-4xl md:text-5xl font-bold text-[#0891b2] text-center">
+        Thank You for Submitting Your Information!
+      </h1>
+
+      <p class="text-lg text-gray-600 text-center max-w-2xl">
+        We've received your details and our team will get in touch with you
+        shortly.
+      </p>
+
+      <div class="text-center space-y-6">
+        <h2
+          class="text-xl font-medium text-gray-800"
+          style="font-style: italic"
+        >
+          Need immediate assistance?
+        </h2>
+
+        <button
+          onclick="window.location.href='tel:+918899001751'"
+          class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-lg text-lg transition-colors duration-300 inline-flex items-center space-x-2"
+        >
+          <i data-feather="phone" class="w-5 h-5"></i>
+          <span>Call us Now</span>
+        </button>
+      </div>
+
+      <div
+        class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-8"
+      >
+        <button
+          onclick="window.location.href='index.html'"
+          class="flex items-center space-x-2 text-gray-600 hover:text-[#0891b2] transition-colors duration-300 font-medium"
+        >
+          <i data-feather="arrow-left" class="w-5 h-5"></i>
+          <span>Back to Website</span>
+        </button>
+
+        <button
+          onclick="window.location.href='https://www.instagram.com/grtravel_official/'"
+          class="flex items-center space-x-2 text-gray-600 hover:text-[#0891b2] transition-colors duration-300 font-medium"
+        >
+          <i data-feather="instagram" class="w-5 h-5"></i>
+          <span>Visit Our Instagram Page</span>
+        </button>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        feather.replace();
+      });
+    </script>
+  </body>
+</html>

@@ -361,8 +361,7 @@
 
               <!-- Enquire Button -->
               <button
-                class="w-[50%] bg-yellow-400 text-white font-bold py-3 rounded-md transition-colors duration-300"
-                onmouseover="this.style.backgroundColor='#046591'"
+                class="enquire-btn w-[50%] bg-yellow-400 text-white font-bold py-3 rounded-md hover:bg-[#046591] transition-colors duration-300"
               >
                 ENQUIRE NOW
               </button>
@@ -436,8 +435,7 @@
 
               <!-- Enquire Button -->
               <button
-                class="w-[50%] text-white bg-yellow-400 font-bold py-3 rounded-md transition-colors duration-300"
-                onmouseover="this.style.backgroundColor='#046591'"
+                class="enquire-btn w-[50%] text-white bg-yellow-400 font-bold py-3 rounded-md hover:bg-[#046591] transition-colors duration-300"
               >
                 ENQUIRE NOW
               </button>
@@ -511,7 +509,7 @@
 
               <!-- Enquire Button -->
               <button
-                class="w-[50%] bg-[#facc15] text-white font-bold py-3 rounded-md hover:bg-[#046591] transition-colors duration-300"
+                class="enquire-btn w-[50%] bg-[#facc15] text-white font-bold py-3 rounded-md hover:bg-[#046591] transition-colors duration-300"
               >
                 ENQUIRE NOW
               </button>
@@ -588,7 +586,7 @@
 
               <!-- Enquire Button -->
               <button
-                class="w-[50%] bg-[#facc15] text-white font-bold py-3 rounded-md hover:bg-[#046591] transition-colors duration-300"
+                class="enquire-btn w-[50%] bg-[#facc15] text-white font-bold py-3 rounded-md hover:bg-[#046591] transition-colors duration-300"
               >
                 ENQUIRE NOW
               </button>
@@ -736,7 +734,7 @@
 
               <!-- Enquire Button -->
               <button
-                class="w-[50%] bg-[#facc15] text-white font-bold py-3 rounded-md hover:bg-[#046591] transition-colors duration-300"
+                class="enquire-btn w-[50%] bg-[#facc15] text-white font-bold py-3 rounded-md hover:bg-[#046591] transition-colors duration-300"
               >
                 ENQUIRE NOW
               </button>
@@ -813,7 +811,7 @@
 
               <!-- Enquire Button -->
               <button
-                class="w-[50%] bg-[#facc15] text-white font-bold py-3 rounded-md hover:bg-[#046591] transition-colors duration-300"
+                class="enquire-btn w-[50%] bg-[#facc15] text-white font-bold py-3 rounded-md hover:bg-[#046591] transition-colors duration-300"
               >
                 ENQUIRE NOW
               </button>
@@ -961,7 +959,7 @@
 
               <!-- Enquire Button -->
               <button
-                class="w-[50%] bg-[#facc15] text-white font-bold py-3 rounded-md hover:bg-[#046591] transition-colors duration-300"
+                class="enquire-btn w-[50%] bg-[#facc15] text-white font-bold py-3 rounded-md hover:bg-[#046591] transition-colors duration-300"
               >
                 ENQUIRE NOW
               </button>
@@ -1170,209 +1168,151 @@
           </p>
         </div>
 
-        <!-- Image Collage Grid -->
-        <div
-          class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1 mb-12 px-0 lg:px-24"
-        >
-          <!-- Row 1 -->
-          <div class="h-[300px]">
-            <a
-              href="/images/Image-3.webp"
-              data-lightbox="gallery"
-              data-title="Ladakh Adventure"
-            >
-              <img
-                src="/images/Image-3.webp"
-                alt="Ladakh Adventure"
-                class="w-full h-full object-cover cursor-pointer"
-              />
-            </a>
-          </div>
-          <div class="h-56">
-            <a
-              href="/images/customer-service.png"
-              data-lightbox="gallery"
-              data-title="Mountain Lake"
-            >
-              <img
-                src="/images/customer-service.png"
-                alt="Mountain Lake"
-                class="w-full h-full object-cover cursor-pointer"
-              />
-            </a>
-          </div>
-          <div class="h-48">
-            <a
-              href="/images/ladkh-k.webp"
-              data-lightbox="gallery"
-              data-title="Desert Landscape"
-            >
-              <img
-                src="/images/ladkh-k.webp"
-                alt="Desert Landscape"
-                class="w-full h-full object-cover cursor-pointer"
-              />
-            </a>
-          </div>
-          <div class="h-52">
-            <a
-              href="/images/ladkh-turkh.webp"
-              data-lightbox="gallery"
-              data-title="Monastery"
-            >
-              <img
-                src="/images/ladkh-turkh.webp"
-                alt="Monastery"
-                class="w-full h-full object-cover cursor-pointer"
-              />
-            </a>
-          </div>
-          <div class="h-48">
-            <a
-              href="images/BG.webp"
-              data-lightbox="gallery"
-              data-title="Prayer Flags"
-            >
-              <img
-                src="images/BG.webp"
-                alt="Prayer Flags"
-                class="w-full h-full object-cover cursor-pointer"
-              />
-            </a>
+        <!-- Image Gallery Grid -->
+        <div class="mb-12 px-4 lg:px-12">
+          <!-- Row 1 - 4 Equal Images -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+            <div class="aspect-square">
+              <a href="images/gallery1.webp" data-lightbox="gallery" data-title="Ladakh Pavilion">
+                <img src="images/gallery1.webp" alt="Ladakh Pavilion" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
+              </a>
+            </div>
+            <div class="aspect-square">
+              <a href="images/gallery2.webp" data-lightbox="gallery" data-title="Pangong Lake">
+                <img src="images/gallery2.webp" alt="Pangong Lake" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
+              </a>
+            </div>
+            <div class="aspect-square">
+              <a href="images/gallery3.webp" data-lightbox="gallery" data-title="Monastery View">
+                <img src="images/gallery3.webp" alt="Monastery View" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
+              </a>
+            </div>
+            <div class="aspect-square">
+              <a href="images/gallery4.webp" data-lightbox="gallery" data-title="Prayer Flags">
+                <img src="images/gallery4.webp" alt="Prayer Flags" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
+              </a>
+            </div>
           </div>
 
-          <!-- Row 2 -->
-          <div class="h-52">
-            <a
-              href="/images/ladakh-nubra.webp"
-              data-lightbox="gallery"
-              data-title="Blue Lake"
-            >
-              <img
-                src="/images/ladakh-nubra.webp"
-                alt="Blue Lake"
-                class="w-full h-full object-cover cursor-pointer"
-              />
-            </a>
-          </div>
-          <div class="h-48">
-            <a
-              href="/images/ladkh-k.webp"
-              data-lightbox="gallery"
-              data-title="Valley View"
-            >
-              <img
-                src="/images/ladkh-k.webp"
-                alt="Valley View"
-                class="w-full h-full object-cover cursor-pointer"
-              />
-            </a>
-          </div>
-          <div class="h-56">
-            <a
-              href="/images/customer-service.png"
-              data-lightbox="gallery"
-              data-title="Street Scene"
-            >
-              <img
-                src="/images/customer-service.png"
-                alt="Street Scene"
-                class="w-full h-[250px] object-cover cursor-pointer"
-              />
-            </a>
-          </div>
-          <div class="h-48">
-            <a
-              href="/images/ladakh-nubra.webp"
-              data-lightbox="gallery"
-              data-title="Town Walk"
-            >
-              <img
-                src="/images/ladakh-nubra.webp"
-                alt="Town Walk"
-                class="w-full h-[300px] object-cover cursor-pointer"
-              />
-            </a>
-          </div>
-          <div class="h-52">
-            <a
-              href="/images/ladkh-turkh.webp"
-              data-lightbox="gallery"
-              data-title="Motorcycle"
-            >
-              <img
-                src="/images/ladkh-turkh.webp"
-                alt="Motorcycle"
-                class="w-full h-full object-cover cursor-pointer"
-              />
-            </a>
+          <!-- Row 2 - 3 Equal + 1 Tall -->
+          <div class="flex flex-wrap md:flex-nowrap gap-4 mb-4">
+            <div class="w-full md:w-1/4 aspect-square">
+              <a href="images/gallery5.webp" data-lightbox="gallery" data-title="Leh Market">
+                <img src="images/gallery5.webp" alt="Leh Market" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
+              </a>
+            </div>
+            <div class="w-full md:w-1/4 aspect-square">
+              <a href="images/gallery6.webp" data-lightbox="gallery" data-title="Traveler Portrait">
+                <img src="images/gallery6.webp" alt="Traveler Portrait" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
+              </a>
+            </div>
+            <div class="w-full md:w-1/4 aspect-square">
+              <a href="images/gallery7.webp" data-lightbox="gallery" data-title="Bactrian Camels">
+                <img src="images/gallery7.webp" alt="Bactrian Camels" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
+              </a>
+            </div>
+            <div class="w-full md:w-1/4 aspect-[4/2]">
+              <a href="images/gallery8.webp" data-lightbox="gallery" data-title="Leh Bazaar Street">
+                <img src="images/gallery8.webp" alt="Leh Bazaar Street" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
+              </a>
+            </div>
           </div>
 
-          <!-- Row 3 -->
-          <div class="h-48">
-            <a
-              href="/images/ladakh-nubra.webp"
-              data-lightbox="gallery"
-              data-title="Camel"
-            >
-              <img
-                src="/images/ladakh-nubra.webp"
-                alt="Camel"
-                class="w-full h-full object-cover cursor-pointer"
-              />
-            </a>
+          <!-- Row 3 - 3 Equal + 1 Tall -->
+          <div class="flex flex-wrap md:flex-nowrap gap-4 mb-4">
+            <div class="w-full md:w-1/4 aspect-square">
+              <a href="images/gallery9.webp" data-lightbox="gallery" data-title="Salt Mountains">
+                <img src="images/gallery9.webp" alt="Salt Mountains" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
+              </a>
+            </div>
+            <div class="w-full md:w-1/4 aspect-square">
+              <a href="images/gallery10.webp" data-lightbox="gallery" data-title="Pangong Lake Blue">
+                <img src="images/gallery10.webp" alt="Pangong Lake Blue" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
+              </a>
+            </div>
+            <div class="w-full md:w-1/4 aspect-square">
+              <a href="images/gallery11.webp" data-lightbox="gallery" data-title="Mountain Valley">
+                <img src="images/gallery11.webp" alt="Mountain Valley" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
+              </a>
+            </div>
+            <div class="w-full md:w-1/4 aspect-[4/5]">
+              <a href="images/gallery12.webp" data-lightbox="gallery" data-title="Highland Adventure">
+                <img src="images/gallery12.webp" alt="Highland Adventure" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
+              </a>
+            </div>
           </div>
-          <div class="h-56">
-            <a
-              href="/images/ladkh-k.webp"
-              data-lightbox="gallery"
-              data-title="Mountain View"
-            >
-              <img
-                src="/images/ladkh-k.webp"
-                alt="Mountain View"
-                class="w-full h-full object-cover cursor-pointer"
-              />
-            </a>
+
+          <!-- Row 4 - 3 Equal + 1 Tall -->
+          <div class="flex flex-wrap md:flex-nowrap gap-4 mb-4">
+            <div class="w-full md:w-1/4 aspect-square">
+              <a href="images/gallery13.webp" data-lightbox="gallery" data-title="Mountain Biker on Highway">
+                <img src="images/gallery13.webp" alt="Mountain Biker on Highway" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
+              </a>
+            </div>
+            <div class="w-full md:w-1/4 aspect-square">
+              <a href="images/gallery14.webp" data-lightbox="gallery" data-title="Biker on Mountain Road">
+                <img src="images/gallery14.webp" alt="Biker on Mountain Road" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
+              </a>
+            </div>
+            <div class="w-full md:w-1/4 aspect-square">
+              <a href="images/gallery15.webp" data-lightbox="gallery" data-title="Milestone Adventure">
+                <img src="images/gallery15.webp" alt="Milestone Adventure" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
+              </a>
+            </div>
+            <div class="w-full md:w-1/4 aspect-[4/5]">
+              <a href="images/gallery16.webp" data-lightbox="gallery" data-title="Prayer Flags Mountain View">
+                <img src="images/gallery16.webp" alt="Prayer Flags Mountain View" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
+              </a>
+            </div>
           </div>
-          <div class="h-48">
-            <a
-              href="/images/ladkh-turkh.webp"
-              data-lightbox="gallery"
-              data-title="Salt Lake"
-            >
-              <img
-                src="/images/ladkh-turkh.webp"
-                alt="Salt Lake"
-                class="w-full h-full object-cover cursor-pointer"
-              />
-            </a>
+
+          <!-- Row 5 - 3 Equal + 1 Tall -->
+          <div class="flex flex-wrap md:flex-nowrap gap-4">
+            <div class="w-full md:w-1/4 aspect-square">
+              <a href="images/gallery17.webp" data-lightbox="gallery" data-title="Golden Valley Landscape">
+                <img src="images/gallery17.webp" alt="Golden Valley Landscape" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
+              </a>
+            </div>
+            <div class="w-full md:w-1/4 aspect-square">
+              <a href="images/gallery18.webp" data-lightbox="gallery" data-title="Ancient Monastery">
+                <img src="images/gallery18.webp" alt="Ancient Monastery" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
+              </a>
+            </div>
+            <div class="w-full md:w-1/4 aspect-square">
+              <a href="images/gallery19.webp" data-lightbox="gallery" data-title="Desert Terrain">
+                <img src="images/gallery19.webp" alt="Desert Terrain" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
+              </a>
+            </div>
+            <div class="w-full md:w-1/4 aspect-[4/5]">
+              <a href="images/gallery20.webp" data-lightbox="gallery" data-title="Mountain Lake Vista">
+                <img src="images/gallery20.webp" alt="Mountain Lake Vista" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
+              </a>
+            </div>
           </div>
-          <div class="h-52">
-            <a
-              href="/images/ladkh-k.webp"
-              data-lightbox="gallery"
-              data-title="Lake Edge"
-            >
-              <img
-                src="/images/ladkh-k.webp"
-                alt="Lake Edge"
-                class="w-full h-full object-cover cursor-pointer"
-              />
-            </a>
-          </div>
-          <div class="h-48">
-            <a
-              href="images/ladkh-turkh.webp"
-              data-lightbox="gallery"
-              data-title="Snow Mountains"
-            >
-              <img
-                src="images/ladkh-turkh.webp"
-                alt="Snow Mountains"
-                class="w-full h-full object-cover cursor-pointer"
-              />
-            </a>
+
+
+           <!-- Row 6 - 3 Equal + 1 Tall -->
+           <div class="flex flex-wrap md:flex-nowrap gap-4 mt-4">
+            <div class="w-full md:w-1/4 aspect-square">
+              <a href="images/gallery21.webp" data-lightbox="gallery" data-title="Golden Valley Landscape">
+                <img src="images/gallery21.webp" alt="Golden Valley Landscape" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
+              </a>
+            </div>
+            <div class="w-full md:w-1/4 aspect-square">
+              <a href="images/gallery22.webp" data-lightbox="gallery" data-title="Ancient Monastery">
+                <img src="images/gallery22.webp" alt="Ancient Monastery" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
+              </a>
+            </div>
+            <div class="w-full md:w-1/4 aspect-square">
+              <a href="images/gallery23.webp" data-lightbox="gallery" data-title="Desert Terrain">
+                <img src="images/gallery23.webp" alt="Desert Terrain" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
+              </a>
+            </div>
+            <!-- <div class="w-full md:w-1/4 aspect-[4/5]">
+              <a href="images/gallery.webp" data-lightbox="gallery" data-title="Mountain Lake Vista">
+                <img src="images/gallery20.webp" alt="Mountain Lake Vista" class="w-full h-full object-cover cursor-pointer rounded-lg hover:scale-105 transition-transform duration-300" />
+              </a>
+            </div> -->
           </div>
         </div>
 
@@ -2196,40 +2136,42 @@
 
     <!-- Scripts -->
     <script>
-      feather.replace();
-
-      const images = [
-        "images/ladakh-nubra.webp",
-        "images/ladkh-k.webp",
-        "images/ladkh-turkh.webp",
-      ];
-
-      let index = 0;
-      let currentLayer = 1;
-      const bg1 = document.getElementById("background-slideshow-1");
-      const bg2 = document.getElementById("background-slideshow-2");
-
-      // Set initial image
-      bg1.style.backgroundImage = `url(${images[index]})`;
-
-      setInterval(() => {
-        index = (index + 1) % images.length;
-
-        if (currentLayer === 1) {
-          bg2.style.backgroundImage = `url(${images[index]})`;
-          bg2.style.opacity = 1;
-          bg1.style.opacity = 0;
-          currentLayer = 2;
-        } else {
-          bg1.style.backgroundImage = `url(${images[index]})`;
-          bg1.style.opacity = 1;
-          bg2.style.opacity = 0;
-          currentLayer = 1;
-        }
-      }, 4000);
-
-      // Initialize Owl Carousel
       $(document).ready(function () {
+        // Initialize Feather Icons
+        feather.replace();
+
+        // Hero Background Slideshow
+        const images = [
+          "images/ladakh-nubra.webp",
+          "images/ladkh-k.webp",
+          "images/ladkh-turkh.webp",
+        ];
+
+        let index = 0;
+        let currentLayer = 1;
+        const $bg1 = $("#background-slideshow-1");
+        const $bg2 = $("#background-slideshow-2");
+
+        // Set initial image
+        $bg1.css("background-image", `url(${images[index]})`);
+
+        setInterval(() => {
+          index = (index + 1) % images.length;
+
+          if (currentLayer === 1) {
+            $bg2.css("background-image", `url(${images[index]})`);
+            $bg2.css("opacity", 1);
+            $bg1.css("opacity", 0);
+            currentLayer = 2;
+          } else {
+            $bg1.css("background-image", `url(${images[index]})`);
+            $bg1.css("opacity", 1);
+            $bg2.css("opacity", 0);
+            currentLayer = 1;
+          }
+        }, 4000);
+
+        // Initialize Owl Carousel
         var owl = $(".owl-carousel").owlCarousel({
           loop: true,
           margin: 20,
@@ -2259,111 +2201,97 @@
         $("#prevBtn").click(function () {
           owl.trigger("prev.owl.carousel");
         });
-      });
 
-      // FAQ Accordion Function
-      function toggleFAQ(id) {
-        const content = document.getElementById(`content-${id}`);
-        const icon = document.getElementById(`icon-${id}`);
-        const faqItem = content.parentElement;
-
-        if (content.classList.contains("hidden")) {
-          // Close all other FAQ items
-          document.querySelectorAll('[id^="content-"]').forEach((item) => {
-            if (item.id !== `content-${id}`) {
-              item.classList.add("hidden");
-              item.parentElement.classList.remove(
-                "bg-white",
-                "border-t-4",
-                "border-blue-500"
-              );
-              item.parentElement.classList.add("bg-gray-100");
-              document.getElementById(
-                item.id.replace("content-", "icon-")
-              ).textContent = "+";
-            }
-          });
-
-          // Open current FAQ item
-          content.classList.remove("hidden");
-          icon.textContent = "−";
-          faqItem.classList.remove("bg-gray-100");
-          faqItem.classList.add("bg-white", "border-t-4", "border-blue-500");
-        } else {
-          // Close current FAQ item
-          content.classList.add("hidden");
-          icon.textContent = "+";
-          faqItem.classList.remove("bg-white", "border-t-4", "border-blue-500");
-          faqItem.classList.add("bg-gray-100");
+        // Modal Functions
+        function openModal() {
+          $("#tripModal").removeClass("hidden");
+          $("body").css("overflow", "hidden"); // Prevent background scrolling
         }
-      }
 
-      // Modal Functions
-      function openModal() {
-        document.getElementById("tripModal").classList.remove("hidden");
-        document.body.style.overflow = "hidden"; // Prevent background scrolling
-      }
+        function closeModal() {
+          $("#tripModal").addClass("hidden");
+          $("body").css("overflow", "auto"); // Restore scrolling
+        }
 
-      function closeModal() {
-        document.getElementById("tripModal").classList.add("hidden");
-        document.body.style.overflow = "auto"; // Restore scrolling
-      }
+        // Modal Event Listeners
+        $("#openModal").click(openModal);
+        $(".enquire-btn").click(openModal); // Add click event to all enquire buttons
+        $("#closeModal").click(closeModal);
 
-      // Event Listeners
-      document.getElementById("openModal").addEventListener("click", openModal);
-      document
-        .getElementById("closeModal")
-        .addEventListener("click", closeModal);
-
-      // Close modal when clicking on overlay
-      document
-        .getElementById("tripModal")
-        .addEventListener("click", function (e) {
+        // Close modal when clicking on overlay
+        $("#tripModal").click(function (e) {
           if (e.target === this) {
             closeModal();
           }
         });
 
-      // Close modal with Escape key
-      document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape") {
-          closeModal();
-        }
-      });
+        // Close modal with Escape key
+        $(document).keydown(function (e) {
+          if (e.key === "Escape") {
+            closeModal();
+          }
+        });
 
-      // Lightbox Configuration
-      lightbox.option({
-        resizeDuration: 200,
-        wrapAround: true,
-        showImageNumberLabel: true,
-        albumLabel: "Image %1 of %2",
-        fadeDuration: 300,
-        imageFadeDuration: 300,
-        positionFromTop: 50,
-        disableScrolling: true,
-      });
+        // Back to Top Button Functionality
+        const $backToTopBtn = $("#backToTop");
 
-      // Back to Top Button Functionality
-      const backToTopBtn = document.getElementById('backToTop');
+        // Show/hide button based on scroll position
+        $(window).scroll(function() {
+          if ($(window).scrollTop() > 300) {
+            $backToTopBtn.removeClass('opacity-0 invisible').addClass('opacity-100 visible');
+          } else {
+            $backToTopBtn.removeClass('opacity-100 visible').addClass('opacity-0 invisible');
+          }
+        });
 
-      // Show/hide button based on scroll position
-      window.addEventListener('scroll', function() {
-        if (window.pageYOffset > 300) {
-          backToTopBtn.classList.remove('opacity-0', 'invisible');
-          backToTopBtn.classList.add('opacity-100', 'visible');
-        } else {
-          backToTopBtn.classList.remove('opacity-100', 'visible');
-          backToTopBtn.classList.add('opacity-0', 'invisible');
-        }
-      });
+        // Scroll to top when button is clicked
+        $backToTopBtn.click(function() {
+          $('html, body').animate({
+            scrollTop: 0
+          }, 600);
+        });
 
-      // Scroll to top when button is clicked
-      backToTopBtn.addEventListener('click', function() {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
+        // Lightbox Configuration
+        lightbox.option({
+          resizeDuration: 200,
+          wrapAround: true,
+          showImageNumberLabel: true,
+          albumLabel: "Image %1 of %2",
+          fadeDuration: 300,
+          imageFadeDuration: 300,
+          positionFromTop: 50,
+          disableScrolling: true,
         });
       });
+
+      // FAQ Accordion Function (kept as global function for onclick attributes)
+      function toggleFAQ(id) {
+        const $content = $(`#content-${id}`);
+        const $icon = $(`#icon-${id}`);
+        const $faqItem = $content.parent();
+
+        if ($content.hasClass("hidden")) {
+          // Close all other FAQ items
+          $('[id^="content-"]').each(function() {
+            const $this = $(this);
+            if ($this.attr('id') !== `content-${id}`) {
+              $this.addClass("hidden");
+              $this.parent().removeClass("bg-white border-t-4 border-blue-500").addClass("bg-gray-100");
+              $(`#${$this.attr('id').replace("content-", "icon-")}`).text("+");
+            }
+          });
+
+          // Open current FAQ item
+          $content.removeClass("hidden");
+          $icon.text("−");
+          $faqItem.removeClass("bg-gray-100").addClass("bg-white border-t-4 border-blue-500");
+        } else {
+          // Close current FAQ item
+          $content.addClass("hidden");
+          $icon.text("+");
+          $faqItem.removeClass("bg-white border-t-4 border-blue-500").addClass("bg-gray-100");
+        }
+      }
     </script>
   </body>
 </html>
