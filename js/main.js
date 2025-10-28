@@ -4,7 +4,7 @@ const EMAILJS_SERVICE_ID = "service_wzfo9df";
 const EMAILJS_TEMPLATE_ID = "template_toqo3u6"; 
 const EMAILJS_PUBLIC_KEY = "st7TIIV_ztcXD_aif"; 
 
-// Initialize EmailJS
+
 (function () {
   emailjs.init(EMAILJS_PUBLIC_KEY);
 })();
@@ -100,17 +100,17 @@ $(document).ready(function () {
     }
   });
 
-  // Close modal with Escape key
+ 
   $(document).keydown(function (e) {
     if (e.key === "Escape") {
       closeModal();
     }
   });
 
-  // Back to Top Button Functionality
+  
   const $backToTopBtn = $("#backToTop");
 
-  // Show/hide button based on scroll position
+ 
   $(window).scroll(function () {
     if ($(window).scrollTop() > 300) {
       $backToTopBtn
@@ -385,18 +385,18 @@ $(document).ready(function () {
           
           const fullText = $textElement.text().trim();
           
-          // Only show toggle if text is longer than maxLength
+         
           if (fullText.length > config.maxLength) {
-            // Find the last complete word before maxLength
+            
             let truncateAt = config.maxLength;
             const lastSpaceIndex = fullText.lastIndexOf(' ', config.maxLength);
-            if (lastSpaceIndex > config.maxLength - 20) { // Don't cut too short for a word
+            if (lastSpaceIndex > config.maxLength - 20) { 
               truncateAt = lastSpaceIndex;
             }
             
             const truncatedText = fullText.substring(0, truncateAt).trim() + "...";
             
-            // Set initial state to truncated
+       
             $textElement.text(truncatedText);
             $textElement.data('full-text', fullText);
             $textElement.data('truncated-text', truncatedText);
@@ -405,24 +405,24 @@ $(document).ready(function () {
             // Show the toggle button and set initial text
             $toggleButton.removeClass('hidden').text('view more');
             
-            // Add click event listener
+            
             $toggleButton.off('click').on('click', function() {
               const isExpanded = $textElement.data('is-expanded');
               
               if (isExpanded) {
-                // Collapse text
+                
                 $textElement.text($textElement.data('truncated-text'));
                 $textElement.data('is-expanded', false);
                 $toggleButton.text('view more');
               } else {
-                // Expand text
+               
                 $textElement.text($textElement.data('full-text'));
                 $textElement.data('is-expanded', true);
                 $toggleButton.text('hide');
               }
             });
           } else {
-            // Hide toggle button for short text
+            
             $toggleButton.addClass('hidden');
           }
         }
