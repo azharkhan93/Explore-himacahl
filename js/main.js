@@ -1,19 +1,16 @@
 // EmailJS Configuration
 
-const EMAILJS_SERVICE_ID = "service_wzfo9df"; 
-const EMAILJS_TEMPLATE_ID = "template_toqo3u6"; 
-const EMAILJS_PUBLIC_KEY = "st7TIIV_ztcXD_aif"; 
-
+const EMAILJS_SERVICE_ID = "service_wzfo9df";
+const EMAILJS_TEMPLATE_ID = "template_toqo3u6";
+const EMAILJS_PUBLIC_KEY = "st7TIIV_ztcXD_aif";
 
 (function () {
   emailjs.init(EMAILJS_PUBLIC_KEY);
 })();
 
 $(document).ready(function () {
-  
   feather.replace();
 
- 
   const images = [
     "images/ladakh-nubra.webp",
     "images/ladkh-k.webp",
@@ -85,12 +82,26 @@ $(document).ready(function () {
     $("body").css("overflow", "auto"); // Restore scrolling
     // Reset form and button on close
     resetForm(formConfigs.tripForm);
+    // Reset form submission source
+    formSubmissionSource = null;
   }
 
-  // Modal Event Listeners
-  $("#openModal").click(openModal);
-  $(".enquire-btn").click(openModal); // Add click event to all enquire buttons
-  $(".callback-btn").click(openModal); // Add click event to all callback buttons
+  // Modal Event Listeners with source tracking
+  $("#openModal").click(function () {
+    formSubmissionSource = "Banner Form";
+    openModal();
+  });
+
+  $(".enquire-btn").click(function () {
+    formSubmissionSource = "Package Booking - Enquiry";
+    openModal();
+  });
+
+  $(".callback-btn").click(function () {
+    formSubmissionSource = "Callback Request";
+    openModal();
+  });
+
   $("#closeModal").click(closeModal);
 
   // Close modal when clicking on overlay
@@ -100,17 +111,14 @@ $(document).ready(function () {
     }
   });
 
- 
   $(document).keydown(function (e) {
     if (e.key === "Escape") {
       closeModal();
     }
   });
 
-  
   const $backToTopBtn = $("#backToTop");
 
- 
   $(window).scroll(function () {
     if ($(window).scrollTop() > 300) {
       $backToTopBtn
@@ -152,11 +160,12 @@ $(document).ready(function () {
         phone: "#phone",
         tripDetails: "#tripDetails",
         submitBtn: "#submitBtn",
-        progressBar: "#progressBar"
+        progressBar: "#progressBar",
       },
       errorClass: "error-message",
       progressInterval: "progressInterval",
-      buttonText: "Let's Plan My Trip!"
+      buttonText: "Let's Plan My Trip!",
+      defaultSubject: "Banner Form",
     },
     contactForm: {
       selectors: {
@@ -166,60 +175,97 @@ $(document).ready(function () {
         phone: "#contactPhone",
         tripDetails: "#contactTripDetails",
         submitBtn: "#contactSubmitBtn",
-        progressBar: "#contactProgressBar"
+        progressBar: "#contactProgressBar",
       },
       errorClass: "contact-error-message",
       progressInterval: "contactProgressInterval",
-      buttonText: "LET'S PLAN MY TRIP!"
-    }
+      buttonText: "LET'S PLAN MY TRIP!",
+      defaultSubject: "Plan Your Perfect Trip with GR Travel",
+    },
   };
+
+  // Track form submission source
+  let formSubmissionSource = null;
 
   // Universal Form Handler
   function handleFormSubmission(config) {
     $(config.selectors.form).submit(function (e) {
       e.preventDefault();
 
-      // Get form data
-      const formData = {
-        firstName: $(config.selectors.firstName).val().trim(),
-        email: $(config.selectors.email).val().trim(),
-        phone: $(config.selectors.phone).val().trim(),
-        tripDetails: $(config.selectors.tripDetails).val().trim(),
-      };
+      try {
+        // Get form data
+        const formData = {
+          firstName: $(config.selectors.firstName).val().trim(),
+          email: $(config.selectors.email).val().trim(),
+          phone: $(config.selectors.phone).val().trim(),
+          tripDetails: $(config.selectors.tripDetails).val().trim(),
+        };
 
-      // Validate form
-      if (!validateFormData(formData, config)) {
-        return;
-      }
+        // Validate form
+        if (!validateFormData(formData, config)) {
+          return;
+        }
 
-      // Show loading state
-      showLoadingState(config);
+        // Show loading state
+        showLoadingState(config);
 
-      // Prepare email parameters
-      const emailParams = {
-        from_name: formData.firstName,
-        from_email: formData.email,
-        phone: formData.phone,
-        message: formData.tripDetails,
-        to_name: "gR Travel Team",
-      };
+        // Determine subject based on form source or default
+        // For contactForm, always use its default subject; for tripForm (modal), use tracked source
+        const subject =
+          config === formConfigs.contactForm
+            ? config.defaultSubject
+            : formSubmissionSource ||
+              config.defaultSubject ||
+              "Form Submission";
 
-      // Send email using EmailJS
-      emailjs
-        .send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, emailParams)
-        .then(function (response) {
-          console.log("Email sent successfully!", response.status, response.text);
-          
-          // Complete progress bar and redirect
-          completeProgressBar(config);
-          setTimeout(function() {
-            window.location.href = "thank-you-for-submit-ladakh.html";
-          }, 1000);
-        })
-        .catch(function (error) {
-          console.error("Failed to send email:", error);
+        // Prepare email parameters
+        const emailParams = {
+          from_name: formData.firstName,
+          from_email: formData.email,
+          phone: formData.phone,
+          message: formData.tripDetails,
+          to_name: "gR Travel Team",
+          subject: subject,
+        };
+
+        // Send email using EmailJS with try-catch
+        try {
+          emailjs
+            .send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, emailParams)
+            .then(function (response) {
+              console.log(
+                "Email sent successfully!",
+                response.status,
+                response.text
+              );
+
+              // Complete progress bar and redirect
+              completeProgressBar(config);
+              setTimeout(function () {
+                window.location.href = "thank-you-for-submit-ladakh.html";
+              }, 1000);
+            })
+            .catch(function (error) {
+              console.error("Failed to send email:", error);
+              resetSubmitButton(config);
+              alert(
+                "Sorry, there was an error sending your message. Please try again or contact us directly."
+              );
+            });
+        } catch (emailError) {
+          console.error("Error in email sending:", emailError);
           resetSubmitButton(config);
-        });
+          alert(
+            "Sorry, there was an error sending your message. Please try again or contact us directly."
+          );
+        }
+      } catch (error) {
+        console.error("Error in form submission:", error);
+        resetSubmitButton(config);
+        alert(
+          "Sorry, there was an error processing your form. Please try again."
+        );
+      }
     });
   }
 
@@ -236,7 +282,11 @@ $(document).ready(function () {
 
     // Validate first name
     if (!data.firstName) {
-      showFieldError(config.selectors.firstName, "First name is required", config);
+      showFieldError(
+        config.selectors.firstName,
+        "First name is required",
+        config
+      );
       isValid = false;
     }
 
@@ -245,22 +295,38 @@ $(document).ready(function () {
       showFieldError(config.selectors.email, "Email is required", config);
       isValid = false;
     } else if (!isValidEmail(data.email)) {
-      showFieldError(config.selectors.email, "Please enter a valid email address", config);
+      showFieldError(
+        config.selectors.email,
+        "Please enter a valid email address",
+        config
+      );
       isValid = false;
     }
 
     // Validate phone
     if (!data.phone) {
-      showFieldError(config.selectors.phone, "Phone number is required", config);
+      showFieldError(
+        config.selectors.phone,
+        "Phone number is required",
+        config
+      );
       isValid = false;
     } else if (!isValidPhone(data.phone)) {
-      showFieldError(config.selectors.phone, "Please enter a valid phone number", config);
+      showFieldError(
+        config.selectors.phone,
+        "Please enter a valid phone number",
+        config
+      );
       isValid = false;
     }
 
     // Validate trip details
     if (!data.tripDetails) {
-      showFieldError(config.selectors.tripDetails, "Trip details are required", config);
+      showFieldError(
+        config.selectors.tripDetails,
+        "Trip details are required",
+        config
+      );
       isValid = false;
     }
 
@@ -291,9 +357,9 @@ $(document).ready(function () {
   }
 
   function clearErrorStates(config) {
-    $(`${config.selectors.form} input, ${config.selectors.form} textarea`).removeClass(
-      "border-red-500 bg-red-50"
-    );
+    $(
+      `${config.selectors.form} input, ${config.selectors.form} textarea`
+    ).removeClass("border-red-500 bg-red-50");
     $(`.${config.errorClass}`).remove();
   }
 
@@ -304,29 +370,32 @@ $(document).ready(function () {
     $submitBtn.html(`
       <div class="relative w-full">
         <div class="bg-orange-400 rounded h-2 w-full">
-          <div id="${config.selectors.progressBar.replace('#', '')}" class="bg-white h-2 rounded transition-all duration-300 ease-out" style="width: 0%"></div>
+          <div id="${config.selectors.progressBar.replace(
+            "#",
+            ""
+          )}" class="bg-white h-2 rounded transition-all duration-300 ease-out" style="width: 0%"></div>
         </div>
         <span class="absolute inset-0 flex items-center justify-center text-white text-sm font-bold">Sending...</span>
       </div>
     `);
-    
+
     // Start progress animation
     startProgressAnimation(config);
   }
 
   function startProgressAnimation(config) {
     let progress = 0;
-    const interval = setInterval(function() {
-      progress += Math.random() * 15; 
-      if (progress > 90) progress = 90; 
-      
+    const interval = setInterval(function () {
+      progress += Math.random() * 15;
+      if (progress > 90) progress = 90;
+
       $(config.selectors.progressBar).css("width", progress + "%");
-      
+
       if (progress >= 90) {
         clearInterval(interval);
       }
     }, 200);
-    
+
     // Store interval ID for cleanup
     window[config.progressInterval] = interval;
   }
@@ -336,10 +405,10 @@ $(document).ready(function () {
     if (window[config.progressInterval]) {
       clearInterval(window[config.progressInterval]);
     }
-    
+
     // Complete the progress bar
     $(config.selectors.progressBar).css("width", "100%");
-    
+
     // Update button text
     $(`${config.selectors.submitBtn} .relative span`).text("Complete!");
   }
@@ -349,7 +418,7 @@ $(document).ready(function () {
     if (window[config.progressInterval]) {
       clearInterval(window[config.progressInterval]);
     }
-    
+
     const $submitBtn = $(config.selectors.submitBtn);
     $submitBtn.prop("disabled", false);
     $submitBtn.html(config.buttonText);
@@ -368,62 +437,60 @@ $(document).ready(function () {
     { textId: "review-text-2", buttonId: "toggle-btn-2", maxLength: 120 },
     { textId: "review-text-3", buttonId: "toggle-btn-3", maxLength: 100 },
     { textId: "review-text-4", buttonId: "toggle-btn-4", maxLength: 100 },
-    { textId: "review-text-5", buttonId: "toggle-btn-5", maxLength: 150 }
+    { textId: "review-text-5", buttonId: "toggle-btn-5", maxLength: 150 },
   ];
 
   // Initialize review text truncation after a small delay to ensure carousel is ready
   setTimeout(() => {
-    reviewConfigs.forEach(config => {
+    reviewConfigs.forEach((config) => {
       // Use class selectors instead of IDs to handle cloned elements
-      $(`.owl-carousel .item`).each(function(index) {
+      $(`.owl-carousel .item`).each(function (index) {
         const $textElement = $(this).find(`#${config.textId}`);
         const $toggleButton = $(this).find(`#${config.buttonId}`);
-        
-        if ($textElement.length && $toggleButton.length && !$textElement.hasClass('processed')) {
+
+        if (
+          $textElement.length &&
+          $toggleButton.length &&
+          !$textElement.hasClass("processed")
+        ) {
           // Mark as processed to avoid duplicate processing
-          $textElement.addClass('processed');
-          
+          $textElement.addClass("processed");
+
           const fullText = $textElement.text().trim();
-          
-         
+
           if (fullText.length > config.maxLength) {
-            
             let truncateAt = config.maxLength;
-            const lastSpaceIndex = fullText.lastIndexOf(' ', config.maxLength);
-            if (lastSpaceIndex > config.maxLength - 20) { 
+            const lastSpaceIndex = fullText.lastIndexOf(" ", config.maxLength);
+            if (lastSpaceIndex > config.maxLength - 20) {
               truncateAt = lastSpaceIndex;
             }
-            
-            const truncatedText = fullText.substring(0, truncateAt).trim() + "...";
-            
-       
+
+            const truncatedText =
+              fullText.substring(0, truncateAt).trim() + "...";
+
             $textElement.text(truncatedText);
-            $textElement.data('full-text', fullText);
-            $textElement.data('truncated-text', truncatedText);
-            $textElement.data('is-expanded', false);
-            
+            $textElement.data("full-text", fullText);
+            $textElement.data("truncated-text", truncatedText);
+            $textElement.data("is-expanded", false);
+
             // Show the toggle button and set initial text
-            $toggleButton.removeClass('hidden').text('view more');
-            
-            
-            $toggleButton.off('click').on('click', function() {
-              const isExpanded = $textElement.data('is-expanded');
-              
+            $toggleButton.removeClass("hidden").text("view more");
+
+            $toggleButton.off("click").on("click", function () {
+              const isExpanded = $textElement.data("is-expanded");
+
               if (isExpanded) {
-                
-                $textElement.text($textElement.data('truncated-text'));
-                $textElement.data('is-expanded', false);
-                $toggleButton.text('view more');
+                $textElement.text($textElement.data("truncated-text"));
+                $textElement.data("is-expanded", false);
+                $toggleButton.text("view more");
               } else {
-               
-                $textElement.text($textElement.data('full-text'));
-                $textElement.data('is-expanded', true);
-                $toggleButton.text('hide');
+                $textElement.text($textElement.data("full-text"));
+                $textElement.data("is-expanded", true);
+                $toggleButton.text("hide");
               }
             });
           } else {
-            
-            $toggleButton.addClass('hidden');
+            $toggleButton.addClass("hidden");
           }
         }
       });
@@ -432,36 +499,39 @@ $(document).ready(function () {
 
   // Gallery scroll animation functionality
   function initGalleryAnimations() {
-    const galleryRows = document.querySelectorAll('.gallery-row');
-    
+    const galleryRows = document.querySelectorAll(".gallery-row");
+
     // Create intersection observer
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const row = entry.target;
-          const items = row.querySelectorAll('.gallery-item');
-          
-          // Add animate class to the row
-          row.classList.add('animate');
-          
-          // Add animate class to each item with staggered delay
-          items.forEach((item, index) => {
-            setTimeout(() => {
-              item.classList.add('animate');
-            }, index * 100); // 100ms delay between each item
-          });
-          
-          // Stop observing this row after it's animated
-          observer.unobserve(row);
-        }
-      });
-    }, {
-      threshold: 0.2, // Trigger when 20% of the row is visible
-      rootMargin: '0px 0px -50px 0px' // Trigger slightly before the element comes into view
-    });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const row = entry.target;
+            const items = row.querySelectorAll(".gallery-item");
+
+            // Add animate class to the row
+            row.classList.add("animate");
+
+            // Add animate class to each item with staggered delay
+            items.forEach((item, index) => {
+              setTimeout(() => {
+                item.classList.add("animate");
+              }, index * 100); // 100ms delay between each item
+            });
+
+            // Stop observing this row after it's animated
+            observer.unobserve(row);
+          }
+        });
+      },
+      {
+        threshold: 0.2, // Trigger when 20% of the row is visible
+        rootMargin: "0px 0px -50px 0px", // Trigger slightly before the element comes into view
+      }
+    );
 
     // Start observing each gallery row
-    galleryRows.forEach(row => {
+    galleryRows.forEach((row) => {
       observer.observe(row);
     });
   }
@@ -469,4 +539,3 @@ $(document).ready(function () {
   // Initialize gallery animations
   initGalleryAnimations();
 });
-
