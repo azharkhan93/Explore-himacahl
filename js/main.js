@@ -11,36 +11,6 @@ const EMAILJS_PUBLIC_KEY = "st7TIIV_ztcXD_aif";
 $(document).ready(function () {
   feather.replace();
 
-  const images = [
-    "images/ladakh-nubra.webp",
-    "images/ladkh-k.webp",
-    "images/ladkh-turkh.webp",
-  ];
-
-  let index = 0;
-  let currentLayer = 1;
-  const $bg1 = $("#background-slideshow-1");
-  const $bg2 = $("#background-slideshow-2");
-
-  // Set initial image
-  $bg1.css("background-image", `url(${images[index]})`);
-
-  setInterval(() => {
-    index = (index + 1) % images.length;
-
-    if (currentLayer === 1) {
-      $bg2.css("background-image", `url(${images[index]})`);
-      $bg2.css("opacity", 1);
-      $bg1.css("opacity", 0);
-      currentLayer = 2;
-    } else {
-      $bg1.css("background-image", `url(${images[index]})`);
-      $bg1.css("opacity", 1);
-      $bg2.css("opacity", 0);
-      currentLayer = 1;
-    }
-  }, 4000);
-
   // Initialize Owl Carousel
   var owl = $(".owl-carousel").owlCarousel({
     loop: true,
@@ -138,15 +108,17 @@ $(document).ready(function () {
 
   // FAQ Toggle Function
   window.toggleFAQ = function (id) {
-    const $answer = $(`#answer-${id}`);
+    const $content = $(`#content-${id}`);
     const $icon = $(`#icon-${id}`);
 
-    if ($answer.hasClass("hidden")) {
-      $answer.removeClass("hidden");
-      $icon.text("−");
-    } else {
-      $answer.addClass("hidden");
-      $icon.text("+");
+    if ($content.length && $icon.length) {
+      if ($content.hasClass("hidden")) {
+        $content.removeClass("hidden");
+        $icon.text("−");
+      } else {
+        $content.addClass("hidden");
+        $icon.text("+");
+      }
     }
   };
 

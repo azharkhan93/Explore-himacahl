@@ -8,6 +8,17 @@
   html, body {
     overflow-x: hidden;
     scroll-behavior: smooth;
+    font-family: 'Josefin Sans', sans-serif;
+  }
+
+ 
+  .fixed.bottom-20.right-6 {
+    z-index: 999;
+  }
+
+  
+  #backToTop {
+    z-index: 999;
   }
 
   /* Gallery Animation Styles */
