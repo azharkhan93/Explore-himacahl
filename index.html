@@ -28,6 +28,11 @@
 
     <script src="https://unpkg.com/feather-icons"></script>
 
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
@@ -134,19 +139,19 @@
       <div
         class="absolute inset-0 flex flex-col justify-center items-center text-center text-white bg-black/40 px-4"
       >
-        <h1 class="text-3xl md:text-4xl max-w-2xl">
+        <h1 id="hero-title" class="text-2xl md:text-4xl w-full md:max-w-2xl">
           Your Dream Shimla Manali Adventure: Perfectly Planned, Unforgettably
           Amazing.
         </h1>
-        <p class="mt-4 max-w-2xl text-lg">
+        <p id="hero-description" class="mt-4 max-w-2xl text-sm md:text-lg">
           Stop stressing over logistics & planning. Experience the magic of
           Himachal with seamless service, curated moments, and premium comfort.
         </p>
         <!-- Action Buttons -->
-        <div class="flex flex-wrap gap-4 justify-center items-center mt-8">
+        <div id="hero-buttons" class="flex flex-wrap gap-4 justify-center items-center mt-8">
           <button
             id="openModal"
-            class="bg-yellow-400 text-black font-semibold px-6 py-3 rounded-md flex items-center space-x-2 hover:bg-[#046591] hover:text-white hover:-translate-y-1 transition-all duration-300 ease-in-out transform"
+            class="hero-btn bg-yellow-400 text-black font-semibold px-6 py-3 rounded-md flex items-center space-x-2 hover:bg-[#046591] hover:text-white hover:-translate-y-1 transition-all duration-300 ease-in-out transform"
           >
             <i data-feather="phone-call" class="w-4 h-4"></i>
             <span class="text-sm">CREATE YOUR DREAM HIMACHAL TRIP</span>
@@ -156,7 +161,7 @@
             href="https://wa.link/1e3r99"
             target="_blank"
             rel="noopener noreferrer"
-            class="bg-[#25D366] text-white font-semibold px-6 py-3 rounded-md flex items-center space-x-2 hover:bg-white hover:text-[#25D366] hover:-translate-y-1 transition-all duration-300 ease-in-out transform"
+            class="hero-btn bg-[#25D366] text-white font-semibold px-6 py-3 rounded-md flex items-center space-x-2 hover:bg-white hover:text-[#25D366] hover:-translate-y-1 transition-all duration-300 ease-in-out transform"
           >
             <svg
               class="w-5 h-5"
@@ -172,7 +177,7 @@
 
         <!-- Stats -->
         <div
-          class="flex flex-wrap justify-center items-center mt-10 gap-3 text-xs md:text-sm px-4"
+          class="flex flex-wrap justify-start lg:justify-center items-center mt-10 gap-3 text-xs md:text-sm px-1 md:px-4"
         >
           <div
             class="flex items-start space-x-2 px-4 py-2 bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 max-w-[180px]"
@@ -187,6 +192,20 @@
               >11,250+ Happy Customers</span
             >
           </div>
+
+          <div
+          class="flex items-start space-x-2 px-4 py-2 bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 max-w-[180px]"
+        >
+          <div class="bg-yellow-400 p-1.5 rounded-full mt-0.5">
+            <i
+              data-feather="star"
+              class="w-3.5 h-3.5 text-[#0473A5] flex-shrink-0"
+            ></i>
+          </div>
+          <span class="text-gray-800 font-semibold leading-tight"
+            >4.8 star Google Rating</span
+          >
+        </div>
           <div
             class="flex items-start space-x-2 px-4 py-2 bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 max-w-[230px]"
           >
@@ -213,19 +232,7 @@
               >Registered with State Ministry of Tourism</span
             >
           </div>
-          <div
-            class="flex items-start space-x-2 px-4 py-2 bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 max-w-[180px]"
-          >
-            <div class="bg-yellow-400 p-1.5 rounded-full mt-0.5">
-              <i
-                data-feather="star"
-                class="w-3.5 h-3.5 text-[#0473A5] flex-shrink-0"
-              ></i>
-            </div>
-            <span class="text-gray-800 font-semibold leading-tight"
-              >4.8 star Google Rating</span
-            >
-          </div>
+         
         </div>
       </div>
 
@@ -276,10 +283,10 @@
       <div class="max-w-7xl mx-auto px-4">
         <!-- Section Header -->
         <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold text-[#0473A5] mb-4">
+          <h2 id="packages-heading" class="text-3xl md:text-4xl font-bold text-[#0473A5] mb-4">
             Popular Shimla Manali Tour Packages!
           </h2>
-          <p class="text-lg text-gray-600 max-w-4xl mx-auto">
+          <p id="packages-description" class="text-lg text-gray-600 max-w-4xl mx-auto">
             Experience the Magic of Himachal - Unforgettable Shimla & Manali
             Adventures Await!
           </p>
@@ -291,8 +298,9 @@
         >
           <!-- Package 1: Romantic Getaway to Shimla Manali Tour -->
           <div
-            class="bg-white rounded-lg overflow-hidden flex-1 max-w-sm mx-auto lg:mx-0 border-2 border-gray-200"
+            class="package-card package-card-left bg-white rounded-lg overflow-hidden flex-1 max-w-sm mx-auto lg:mx-0 border-2 border-gray-200 relative"
           >
+            <div class="card-gradient-border"></div>
             <!-- Image with Duration Badge -->
             <div class="relative">
               <img
@@ -360,7 +368,7 @@
 
           <!-- Package 2: Best of Shimla Manali Tour – Honeymoon Special -->
           <div
-            class="bg-white rounded-lg overflow-hidden flex-1 max-w-sm mx-auto lg:mx-0 border-2 border-gray-200"
+            class="package-card package-card-right bg-white rounded-lg overflow-hidden flex-1 max-w-sm mx-auto lg:mx-0 border-2 border-gray-200 relative"
           >
             <!-- Image with Duration Badge -->
             <div class="relative">
@@ -429,7 +437,7 @@
 
           <!-- Package 3: Fascinating Manali with Solang & Atal Tunnel Visit -->
           <div
-            class="bg-white rounded-lg overflow-hidden flex-1 max-w-sm mx-auto lg:mx-0 border-2 border-gray-200"
+            class="package-card package-card-left bg-white rounded-lg overflow-hidden flex-1 max-w-sm mx-auto lg:mx-0 border-2 border-gray-200 relative"
           >
             <!-- Image with Duration Badge -->
             <div class="relative">
@@ -503,7 +511,7 @@
         >
           <!-- Package 4: Discover Shimla Vacation -->
           <div
-            class="bg-white rounded-lg overflow-hidden flex-1 max-w-sm mx-auto lg:mx-0 border-2 border-gray-200"
+            class="package-card package-card-right bg-white rounded-lg overflow-hidden flex-1 max-w-sm mx-auto lg:mx-0 border-2 border-gray-200 relative"
           >
             <!-- Image with Duration Badge -->
             <div class="relative">
@@ -573,7 +581,7 @@
 
           <!-- Package 5: Manali Volvo Package – Luxury Volvo Tickets Included -->
           <div
-            class="bg-white rounded-lg overflow-hidden flex-1 max-w-sm mx-auto lg:mx-0 border-2 border-gray-200"
+            class="package-card package-card-left bg-white rounded-lg overflow-hidden flex-1 max-w-sm mx-auto lg:mx-0 border-2 border-gray-200 relative"
           >
             <!-- Image with Duration Badge -->
             <div class="relative">
@@ -642,7 +650,7 @@
 
           <!-- Package 6: Perfect Shimla Manali Honeymoon Tour -->
           <div
-            class="bg-white rounded-lg overflow-hidden flex-1 max-w-sm mx-auto lg:mx-0 border-2 border-gray-200"
+            class="package-card package-card-right bg-white rounded-lg overflow-hidden flex-1 max-w-sm mx-auto lg:mx-0 border-2 border-gray-200 relative"
           >
             <!-- Image with Duration Badge -->
             <div class="relative">
@@ -716,7 +724,7 @@
         >
           <!-- Package 7: Memorable Kashmir with Ladakh Holiday -->
           <div
-            class="bg-white rounded-lg overflow-hidden flex-1 max-w-sm mx-auto lg:mx-0 border-2 border-gray-200"
+            class="package-card package-card-left bg-white rounded-lg overflow-hidden flex-1 max-w-sm mx-auto lg:mx-0 border-2 border-gray-200 relative"
           >
             <!-- Image with Duration Badge -->
             <div class="relative">
@@ -790,7 +798,7 @@
 
           <!-- Package 8: Breathtaking Ladakh with Manali & Jispa -->
           <div
-            class="bg-white rounded-lg overflow-hidden flex-1 max-w-sm mx-auto lg:mx-0 border-2 border-gray-200"
+            class="package-card package-card-right bg-white rounded-lg overflow-hidden flex-1 max-w-sm mx-auto lg:mx-0 border-2 border-gray-200 relative"
           >
             <!-- Image with Duration Badge -->
             <div class="relative">
@@ -1267,7 +1275,7 @@
                 <div class="flex items-start space-x-4">
                   <div class="flex-shrink-0">
                     <img
-                      src="images/check.png"
+                      src="images/rupee.png"
                       alt="Licensed"
                       class="w-full h-8"
                     />
@@ -1360,13 +1368,13 @@
           >
             <div class="gallery-item relative overflow-hidden rounded-lg">
               <a
-                href="images/gallery1.webp"
+                href="images/img1.jpg"
                 data-lightbox="gallery"
                 data-title="Ladakh Pavilion"
                 class="block w-full h-full"
               >
                 <img
-                  src="images/gallery1.webp"
+                  src="images/img1.jpg"
                   alt="Ladakh Pavilion"
                   class="absolute inset-0 w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
                 />
@@ -1374,13 +1382,13 @@
             </div>
             <div class="gallery-item relative overflow-hidden rounded-lg">
               <a
-                href="images/gallery2.webp"
+                href="images/img3.jpg"
                 data-lightbox="gallery"
                 data-title="Pangong Lake"
                 class="block w-full h-full"
               >
                 <img
-                  src="images/gallery2.webp"
+                  src="images/img3.jpg"
                   alt="Pangong Lake"
                   class="absolute inset-0 w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
                 />
@@ -1388,13 +1396,13 @@
             </div>
             <div class="gallery-item relative overflow-hidden rounded-lg">
               <a
-                href="images/gallery3.webp"
+                href="images/img4.jpg"
                 data-lightbox="gallery"
                 data-title="Monastery View"
                 class="block w-full h-full"
               >
                 <img
-                  src="images/gallery3.webp"
+                  src="images/img4.jpg"
                   alt="Monastery View"
                   class="absolute inset-0 w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
                 />
@@ -1402,13 +1410,13 @@
             </div>
             <div class="gallery-item relative overflow-hidden rounded-lg">
               <a
-                href="images/gallery4.webp"
+                href="images/img5.jpg"
                 data-lightbox="gallery"
                 data-title="Prayer Flags"
                 class="block w-full h-full"
               >
                 <img
-                  src="images/gallery4.webp"
+                  src="images/img5.jpg"
                   alt="Prayer Flags"
                   class="absolute inset-0 w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
                 />
@@ -1424,13 +1432,13 @@
           >
             <div class="gallery-item relative overflow-hidden rounded-lg">
               <a
-                href="images/gallery5.webp"
+                href="images/img2.jpg"
                 data-lightbox="gallery"
                 data-title="Leh Market"
                 class="block w-full h-full"
               >
                 <img
-                  src="images/gallery5.webp"
+                  src="images/img2.jpg"
                   alt="Leh Market"
                   class="absolute inset-0 w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
                 />
@@ -1438,13 +1446,13 @@
             </div>
             <div class="gallery-item relative overflow-hidden rounded-lg">
               <a
-                href="images/gallery6.webp"
+                href="images/img7.jpg"
                 data-lightbox="gallery"
                 data-title="Traveler Portrait"
                 class="block w-full h-full"
               >
                 <img
-                  src="images/gallery6.webp"
+                  src="images/img7.jpg"
                   alt="Traveler Portrait"
                   class="absolute inset-0 w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
                 />
@@ -1452,13 +1460,13 @@
             </div>
             <div class="gallery-item relative overflow-hidden rounded-lg">
               <a
-                href="images/gallery7.webp"
+                href="images/img10.jpg"
                 data-lightbox="gallery"
                 data-title="Bactrian Camels"
                 class="block w-full h-full"
               >
                 <img
-                  src="images/gallery7.webp"
+                  src="images/img10.jpg"
                   alt="Bactrian Camels"
                   class="absolute inset-0 w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
                 />
@@ -1466,13 +1474,13 @@
             </div>
             <div class="gallery-item relative overflow-hidden rounded-lg">
               <a
-                href="images/gallery8.webp"
+                href="images/img9.jpg"
                 data-lightbox="gallery"
                 data-title="Leh Bazaar Street"
                 class="block w-full h-full"
               >
                 <img
-                  src="images/gallery8.webp"
+                  src="images/img9.jpg"
                   alt="Leh Bazaar Street"
                   class="absolute inset-0 w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
                 />
@@ -1488,13 +1496,13 @@
           >
             <div class="gallery-item relative overflow-hidden rounded-lg">
               <a
-                href="images/gallery9.webp"
+                href="images/img11.jpg"
                 data-lightbox="gallery"
                 data-title="Salt Mountains"
                 class="block w-full h-full"
               >
                 <img
-                  src="images/gallery9.webp"
+                  src="images/img11.jpg"
                   alt="Salt Mountains"
                   class="absolute inset-0 w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
                 />
@@ -1502,13 +1510,13 @@
             </div>
             <div class="gallery-item relative overflow-hidden rounded-lg">
               <a
-                href="images/gallery10.webp"
+                href="images/img12.jpg"
                 data-lightbox="gallery"
                 data-title="Pangong Lake Blue"
                 class="block w-full h-full"
               >
                 <img
-                  src="images/gallery10.webp"
+                  src="images/img12.jpg"
                   alt="Pangong Lake Blue"
                   class="absolute inset-0 w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
                 />
@@ -1516,13 +1524,13 @@
             </div>
             <div class="gallery-item relative overflow-hidden rounded-lg">
               <a
-                href="images/gallery11.webp"
+                href="images/img11.jpg"
                 data-lightbox="gallery"
                 data-title="Mountain Valley"
                 class="block w-full h-full"
               >
                 <img
-                  src="images/gallery11.webp"
+                  src="images/img11.jpg"
                   alt="Mountain Valley"
                   class="absolute inset-0 w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
                 />
@@ -1530,13 +1538,13 @@
             </div>
             <div class="gallery-item relative overflow-hidden rounded-lg">
               <a
-                href="images/gallery12.webp"
+                href="images/img14.jpg"
                 data-lightbox="gallery"
                 data-title="Highland Adventure"
                 class="block w-full h-full"
               >
                 <img
-                  src="images/gallery12.webp"
+                  src="images/img14.jpg"
                   alt="Highland Adventure"
                   class="absolute inset-0 w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
                 />
@@ -2571,9 +2579,10 @@
     <!-- Modal Popup -->
     <div
       id="tripModal"
-      class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4"
+      class="fixed inset-0 bg-black bg-opacity-50 modal-overlay z-50 hidden flex items-center justify-center p-4"
     >
       <div
+        id="modalContent"
         class="bg-white rounded-lg max-w-3xl w-full max-h-[80vh] overflow-hidden relative"
       >
         <!-- Close Button -->
@@ -2602,6 +2611,7 @@
             class="lg:w-1/2 relative rounded-md hidden md:flex items-center pl-5"
           >
             <img
+              id="modalImage"
               src="images/Pop-Up-Image (1).jpg"
               alt="Ladakh Adventure"
               class="w-[350px] h-64 lg:h-[450px] object-cover rounded-md"
@@ -2610,12 +2620,12 @@
 
           <!-- Right Side - Form Panel -->
           <div class="lg:w-1/2 p-6 flex flex-col justify-center">
-            <h2 class="text-2xl lg:text-2xl font-bold text-gray-900 mb-6">
+            <h2 class="modal-form-item text-2xl lg:text-2xl font-bold text-gray-900 mb-6">
               Start Your Hassle-Free Trip Planning Today!
             </h2>
 
             <form id="tripForm" class="space-y-4">
-              <div>
+              <div class="modal-form-item">
                 <input
                   type="text"
                   id="firstName"
@@ -2626,7 +2636,7 @@
                 />
               </div>
 
-              <div>
+              <div class="modal-form-item">
                 <input
                   type="email"
                   id="email"
@@ -2637,7 +2647,7 @@
                 />
               </div>
 
-              <div>
+              <div class="modal-form-item">
                 <input
                   type="tel"
                   id="phone"
@@ -2648,7 +2658,7 @@
                 />
               </div>
 
-              <div>
+              <div class="modal-form-item">
                 <textarea
                   id="tripDetails"
                   name="tripDetails"
@@ -2662,7 +2672,7 @@
               <button
                 type="submit"
                 id="submitBtn"
-                class="w-[50%] bg-orange-500 text-white font-bold py-4 rounded-md hover:bg-orange-600 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                class="modal-form-item w-[50%] bg-orange-500 text-white font-bold py-4 rounded-md hover:bg-orange-600 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Let's Plan My Trip!
               </button>

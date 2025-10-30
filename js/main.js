@@ -11,6 +11,177 @@ const EMAILJS_PUBLIC_KEY = "st7TIIV_ztcXD_aif";
 $(document).ready(function () {
   feather.replace();
 
+  // ========================================
+  // GSAP Hero Section Animations
+  // ========================================
+
+  gsap.registerPlugin(ScrollTrigger, TextPlugin);
+
+  // Hero Animation Configuration
+  const heroConfig = {
+    selectors: {
+      title: "#hero-title",
+      description: "#hero-description",
+      buttons: ".hero-btn",
+    },
+    animations: {
+      title: { duration: 1, stagger: 1.2, ease: "back.out(1.8)" },
+      description: { duration: 1.2, ease: "power3.out" },
+      buttons: { duration: 0.8, stagger: 0.15, ease: "elastic.out(1, 0.6)" },
+      float: { y: -8, duration: 2, ease: "sine.inOut" },
+      glow: { duration: 1.5, ease: "sine.inOut" },
+    },
+    glowColors: {
+      primary:
+        "0 0 20px rgba(250, 204, 21, 0.6), 0 4px 15px rgba(0, 0, 0, 0.2)",
+      whatsapp:
+        "0 0 20px rgba(37, 211, 102, 0.6), 0 4px 15px rgba(0, 0, 0, 0.2)",
+    },
+  };
+
+  // Split text into animated characters
+  const splitTextIntoChars = (element) => {
+    const words = element.textContent.split(" ");
+    element.innerHTML = words
+      .map(
+        (word, i) =>
+          `<span class="word">${word
+            .split("")
+            .map((char) => `<span class="char">${char}</span>`)
+            .join("")}</span>${
+            i < words.length - 1
+              ? '<span class="char" style="opacity:1">&nbsp;</span>'
+              : ""
+          }`
+      )
+      .join("");
+  };
+
+  // Create button interactions
+  const initButtonInteractions = (buttons) => {
+    const interactions = {
+      mouseenter: { scale: 1.08, duration: 0.4, ease: "power2.out" },
+      mouseleave: {
+        scale: 1,
+        rotation: 0,
+        duration: 0.4,
+        ease: "elastic.out(1, 0.5)",
+      },
+      mousedown: { scale: 0.95, duration: 0.1, ease: "power2.in" },
+      mouseup: { scale: 1.08, duration: 0.2, ease: "power2.out" },
+    };
+
+    buttons.forEach((btn, i) => {
+      Object.entries(interactions).forEach(([event, props]) => {
+        btn.addEventListener(event, () => {
+          const rotation =
+            event === "mouseenter" ? (i === 0 ? 2 : -2) : props.rotation || 0;
+          gsap.to(btn, { ...props, rotation });
+        });
+      });
+    });
+  };
+
+  // Initialize hero animations
+  setTimeout(() => {
+    const { title, description, buttons } = heroConfig.selectors;
+    const titleEl = document.querySelector(title);
+    const buttonEls = document.querySelectorAll(buttons);
+
+    if (!titleEl) return;
+
+    splitTextIntoChars(titleEl);
+
+    const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+    const { animations: anim, glowColors } = heroConfig;
+
+    // Title animation
+    tl.to(`${title} .char`, {
+      y: 0,
+      opacity: 1,
+      duration: anim.title.duration,
+      stagger: {
+        amount: anim.title.stagger,
+        from: "start",
+        ease: "power2.out",
+      },
+      ease: anim.title.ease,
+    })
+      .to(
+        `${title} .char:nth-child(odd)`,
+        { rotationZ: 0, duration: 0.5, stagger: 0.05 },
+        "-=1.0"
+      )
+
+      // Description animation
+      .fromTo(
+        description,
+        { opacity: 0, y: 30, scale: 0.95, filter: "blur(10px)" },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          filter: "blur(0px)",
+          duration: anim.description.duration,
+          ease: anim.description.ease,
+        },
+        "-=0.6"
+      )
+
+      // Buttons animation
+      .to(
+        buttons,
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: anim.buttons.duration,
+          stagger: anim.buttons.stagger,
+          ease: anim.buttons.ease,
+          onComplete: () =>
+            gsap.to(buttons, {
+              y: anim.float.y,
+              duration: anim.float.duration,
+              repeat: -1,
+              yoyo: true,
+              ease: anim.float.ease,
+              stagger: { amount: 0.3, from: "start" },
+            }),
+        },
+        "-=0.4"
+      )
+
+      // Glow effects
+      .to(
+        `${buttons}:first-of-type`,
+        {
+          boxShadow: glowColors.primary,
+          duration: anim.glow.duration,
+          repeat: -1,
+          yoyo: true,
+          ease: anim.glow.ease,
+        },
+        "-=0.2"
+      )
+      .to(
+        `${buttons}:last-of-type`,
+        {
+          boxShadow: glowColors.whatsapp,
+          duration: anim.glow.duration,
+          repeat: -1,
+          yoyo: true,
+          ease: anim.glow.ease,
+        },
+        "-=1.5"
+      );
+
+    if (buttonEls.length) initButtonInteractions(buttonEls);
+  }, 100);
+
+  // ========================================
+  // End of GSAP Animations
+  // ========================================
+
   // Initialize Owl Carousel
   var owl = $(".owl-carousel").owlCarousel({
     loop: true,
@@ -41,19 +212,163 @@ $(document).ready(function () {
     owl.trigger("prev.owl.carousel");
   });
 
-  // Modal Functions
-  function openModal() {
-    $("#tripModal").removeClass("hidden");
-    $("body").css("overflow", "hidden"); // Prevent background scrolling
+  // ========================================
+  // Modal Animation Configuration
+  // ========================================
+
+  const modalConfig = {
+    selectors: {
+      modal: "#tripModal",
+      content: "#modalContent",
+      closeBtn: "#closeModal",
+      image: "#modalImage",
+      formItems: ".modal-form-item",
+    },
+    animations: {
+      open: {
+        backdrop: { duration: 0.4, ease: "power2.out" },
+        content: { duration: 0.8, ease: "power3.out", delay: 0.1 },
+        image: { duration: 0.7, ease: "power2.out", delay: 0.15 },
+        formItems: {
+          duration: 0.6,
+          ease: "power2.out",
+          stagger: 0.1,
+          delay: 0.2,
+        },
+        closeBtn: { duration: 0.5, ease: "power2.out", delay: 0.1 },
+      },
+      close: {
+        duration: 0.4,
+        ease: "power2.in",
+      },
+    },
+  };
+
+  // Reset modal elements to initial state
+  const resetModalElements = () => {
+    const { content, image, formItems, closeBtn } = modalConfig.selectors;
+    gsap.set(content, { y: 50, opacity: 0 });
+    gsap.set(image, { y: 40, scale: 0.95, opacity: 0 });
+    gsap.set(formItems, { y: 30, opacity: 0 });
+    gsap.set(closeBtn, { y: -20, scale: 0.8, opacity: 0 });
+  };
+
+  // Modal Functions with GSAP Animations
+  function openModal(isInitialShow = false) {
+    const { modal, content, image, formItems, closeBtn } =
+      modalConfig.selectors;
+    const { open } = modalConfig.animations;
+
+    $(modal).removeClass("hidden").addClass("modal-visible");
+    
+    // Add initial-show class for darker overlay on first load
+    if (isInitialShow) {
+      $(modal).addClass("initial-show");
+    } else {
+      $(modal).removeClass("initial-show");
+    }
+    
+    $("body").css("overflow", "hidden");
+
+    // Create animation timeline with delays
+    const tl = gsap.timeline();
+
+    // Backdrop fade in
+    tl.to(modal, {
+      opacity: 1,
+      duration: open.backdrop.duration,
+      ease: open.backdrop.ease,
+    })
+
+      // Modal content fade up smoothly
+      .to(content, {
+        y: 0,
+        opacity: 1,
+        duration: open.content.duration,
+        ease: open.content.ease,
+        delay: open.content.delay,
+      })
+
+      // Close button fade down
+      .to(
+        closeBtn,
+        {
+          y: 0,
+          scale: 1,
+          opacity: 1,
+          duration: open.closeBtn.duration,
+          ease: open.closeBtn.ease,
+        },
+        `-=${open.content.duration - open.closeBtn.delay}`
+      )
+
+      // Image fade up with scale
+      .to(
+        image,
+        {
+          y: 0,
+          scale: 1,
+          opacity: 1,
+          duration: open.image.duration,
+          ease: open.image.ease,
+        },
+        `-=${open.content.duration - open.image.delay}`
+      )
+
+      // Form items stagger fade up
+      .to(
+        formItems,
+        {
+          y: 0,
+          opacity: 1,
+          duration: open.formItems.duration,
+          stagger: open.formItems.stagger,
+          ease: open.formItems.ease,
+        },
+        `-=${open.content.duration - open.formItems.delay}`
+      );
   }
 
   function closeModal() {
-    $("#tripModal").addClass("hidden");
-    $("body").css("overflow", "auto"); // Restore scrolling
-    // Reset form and button on close
-    resetForm(formConfigs.tripForm);
-    // Reset form submission source
-    formSubmissionSource = null;
+    const { modal, content, formItems, image, closeBtn } =
+      modalConfig.selectors;
+    const { close } = modalConfig.animations;
+
+    // Animate everything out smoothly with fade down
+    gsap
+      .timeline()
+      .to([formItems, image, closeBtn], {
+        y: 20,
+        opacity: 0,
+        duration: close.duration * 0.8,
+        ease: close.ease,
+      })
+      .to(
+        content,
+        {
+          y: 30,
+          opacity: 0,
+          duration: close.duration,
+          ease: close.ease,
+        },
+        "-=0.15"
+      )
+      .to(
+        modal,
+        {
+          opacity: 0,
+          duration: close.duration * 0.8,
+          ease: close.ease,
+          onComplete: () => {
+            $(modal).addClass("hidden").removeClass("modal-visible").removeClass("initial-show");
+            $("body").css("overflow", "auto");
+            resetModalElements();
+            resetForm(formConfigs.tripForm);
+            formSubmissionSource = null;
+          },
+        },
+        "-=0.2"
+      );
   }
 
   // Modal Event Listeners with source tracking
@@ -84,6 +399,44 @@ $(document).ready(function () {
   $(document).keydown(function (e) {
     if (e.key === "Escape") {
       closeModal();
+    }
+  });
+
+  // ========================================
+  // Auto Show Modal on Page Load & Recurring
+  // ========================================
+  
+  let autoModalInterval;
+  
+  function showAutoModal() {
+    // Check if modal is not already open
+    if (!$("#tripModal").hasClass("modal-visible")) {
+      formSubmissionSource = "Auto Pop-up";
+      resetModalElements();
+      openModal(true);
+    }
+  }
+  
+  function initAutoModalSystem() {
+    // Show modal immediately on page load (after 2 seconds for smooth UX)
+    setTimeout(() => {
+      showAutoModal();
+      
+      // Start recurring modal every 2 minutes after first show
+      autoModalInterval = setInterval(() => {
+        showAutoModal();
+      }, 240000); // 4 minutes = 240000ms
+      
+    }, 2000); // 2 seconds initial delay
+  }
+  
+  // Start auto-modal system
+  initAutoModalSystem();
+  
+  // Clear interval when page unloads
+  $(window).on('beforeunload', function() {
+    if (autoModalInterval) {
+      clearInterval(autoModalInterval);
     }
   });
 
@@ -468,6 +821,72 @@ $(document).ready(function () {
       });
     });
   }, 100);
+
+  // ========================================
+  // GSAP Packages Section Heading Animation
+  // ========================================
+
+  function initPackagesHeadingAnimation() {
+    const heading = document.getElementById("packages-heading");
+    const description = document.getElementById("packages-description");
+
+    if (!heading || !description) {
+      console.warn("Packages heading or description not found");
+      return;
+    }
+
+    console.log("Initializing packages heading animation");
+
+    // Heading reveal animation
+    gsap.fromTo(
+      heading,
+      {
+        opacity: 0,
+        y: 60,
+        scale: 0.9,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: "#packages",
+          start: "top 80%",
+          toggleActions: "play none none none",
+          once: true,
+        },
+      }
+    );
+
+    // Description reveal animation with delay
+    gsap.fromTo(
+      description,
+      {
+        opacity: 0,
+        y: 40,
+        scale: 0.95,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 1,
+        delay: 0.3,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: "#packages",
+          start: "top 80%",
+          toggleActions: "play none none none",
+          once: true,
+        },
+      }
+    );
+  }
+
+  // Initialize packages heading animation
+  initPackagesHeadingAnimation();
 
   // Gallery scroll animation functionality
   function initGalleryAnimations() {
