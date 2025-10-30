@@ -628,7 +628,7 @@ $(document).ready(function () {
               // Complete progress bar and redirect
               completeProgressBar(config);
               setTimeout(function () {
-                window.location.href = "thank-you-for-submit-ladakh.html";
+                window.location.href = "thank-you-for-submit-himachal.html";
               }, 1000);
             })
             .catch(function (error) {
