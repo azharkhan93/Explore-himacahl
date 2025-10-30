@@ -15,12 +15,13 @@ body {
 #hero-title {
   word-wrap: break-word;
   overflow-wrap: break-word;
-  hyphens: auto;
+  hyphens: none;
+  white-space: normal;
 }
 
 #hero-title .word {
-  display: inline;
-  white-space: normal;
+  display: inline-block;
+  white-space: nowrap;
 }
 
 #hero-title .char {

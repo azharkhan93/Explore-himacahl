@@ -41,20 +41,15 @@ $(document).ready(function () {
 
   // Split text into animated characters
   const splitTextIntoChars = (element) => {
-    const words = element.textContent.split(" ");
+    const words = element.textContent.trim().split(/\s+/);
     element.innerHTML = words
-      .map(
-        (word, i) =>
-          `<span class="word">${word
-            .split("")
-            .map((char) => `<span class="char">${char}</span>`)
-            .join("")}</span>${
-            i < words.length - 1
-              ? '<span class="char" style="opacity:1">&nbsp;</span>'
-              : ""
-          }`
+      .map((word) =>
+        `<span class="word">${word
+          .split("")
+          .map((char) => `<span class="char">${char}</span>`)
+          .join("")}</span>`
       )
-      .join("");
+      .join(" ");
   };
 
   // Create button interactions
