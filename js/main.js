@@ -422,7 +422,7 @@ $(document).ready(function () {
         showAutoModal();
       }, 240000); // 4 minutes = 240000ms
       
-    }, 2000); // 2 seconds initial delay
+    }, 6000); // 6 seconds initial delay
   }
   
   // Start auto-modal system
