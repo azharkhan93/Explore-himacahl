@@ -31,21 +31,27 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   </head>
-  <body
-  >
+  <body>
     <!-- Success Overlay -->
-    <div id="success-overlay" class="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center gap-4">
-      <div class="flex items-center justify-center h-24 w-24 rounded-full bg-green-100 border-2 border-green-500">
+    <div
+      id="success-overlay"
+      class="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center gap-4"
+    >
+      <div
+        class="flex items-center justify-center h-24 w-24 rounded-full bg-green-100 border-2 border-green-500"
+      >
         <i data-feather="check" class="w-14 h-14 text-green-600"></i>
       </div>
-      <h2 class="text-2xl md:text-3xl font-semibold text-green-700">Success!</h2>
+      <h2 class="text-2xl md:text-3xl font-semibold text-green-700">
+        Success!
+      </h2>
       <p class="text-gray-600">Your details have been submitted.</p>
     </div>
 
     <div
       id="thankyou-content"
       class="min-h-screen flex flex-col items-center justify-center gap-6 px-4 space-y-8"
-      style="display:none"
+      style="display: none"
     >
       <img
         src="images/logo_dark.png"
@@ -53,7 +59,9 @@
         class="h-16 w-auto"
       />
 
-      <h1 class="text-4xl md:text-5xl font-bold text-[#0891b2] text-center max-w-4xl">
+      <h1
+        class="text-4xl md:text-5xl font-bold text-[#0891b2] text-center max-w-4xl"
+      >
         Thank You for Submitting Your Information!
       </h1>
 
@@ -138,7 +146,7 @@
         // Reveal content after a short delay and fade out overlay
         setTimeout(function () {
           $("#thankyou-content").fadeIn(350);
-          $("#success-overlay").fadeOut(500, function(){
+          $("#success-overlay").fadeOut(500, function () {
             $(this).remove();
           });
         }, durationMs);
