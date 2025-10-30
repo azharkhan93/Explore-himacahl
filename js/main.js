@@ -990,4 +990,91 @@ $(document).ready(function () {
 
   // Initialize gallery animations
   initGalleryAnimations();
+  
+  // ========================================
+  // Mobile Navbar with GSAP Animations
+  // ========================================
+  (function initMobileNavbar() {
+    const $openBtn = $("#mobileMenuButton");
+    const $overlay = $("#mobileNav");
+    const linkSelector = "#mobileNav .mobile-nav-link";
+
+    if (!$openBtn.length || !$overlay.length) return;
+
+    // Prepare initial states
+    gsap.set($overlay, { opacity: 0 });
+    gsap.set(linkSelector, { y: 20, opacity: 0 });
+
+    let isOpen = false;
+    let openTl = null;
+
+    function openMobileNav() {
+      if (isOpen) return;
+      isOpen = true;
+      $overlay.removeClass("hidden");
+      $openBtn.attr("aria-expanded", "true");
+      $("body").css("overflow", "hidden");
+
+      // Animate overlay and links in
+      openTl = gsap.timeline();
+      openTl
+        .to($overlay, { opacity: 1, duration: 0.3, ease: "power2.out" })
+        .to(
+          linkSelector,
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.4,
+            ease: "power3.out",
+            stagger: 0.08,
+          },
+          "-=0.1"
+        );
+    }
+
+    function closeMobileNav() {
+      if (!isOpen) return;
+      isOpen = false;
+      $openBtn.attr("aria-expanded", "false");
+
+      // Animate out and then hide
+      gsap
+        .timeline({
+          onComplete: () => {
+            $overlay.addClass("hidden");
+            $("body").css("overflow", "auto");
+            gsap.set($overlay, { opacity: 0 });
+            gsap.set(linkSelector, { y: 20, opacity: 0 });
+          },
+        })
+        .to(linkSelector, {
+          y: 10,
+          opacity: 0,
+          duration: 0.25,
+          ease: "power2.in",
+          stagger: { amount: 0.12, from: "end" },
+        })
+        .to($overlay, { opacity: 0, duration: 0.25, ease: "power2.in" }, "-=0.05");
+    }
+
+    // Event bindings
+    $openBtn.on("click", openMobileNav);
+    // Delegate close click to handle dynamic icon replacements
+    $(document).on("click", "#mobileNavClose, #mobileNavClose *", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      closeMobileNav();
+    });
+    $(document).on("click", linkSelector, closeMobileNav);
+    $(document).on("keydown", function (e) {
+      if (e.key === "Escape") closeMobileNav();
+    });
+
+    // Close when clicking the dim background (but not the centered list or close)
+    $overlay.on("click", function (e) {
+      if (e.target === this) {
+        closeMobileNav();
+      }
+    });
+  })();
 });
