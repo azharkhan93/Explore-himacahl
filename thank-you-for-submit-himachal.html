@@ -29,11 +29,23 @@
     <script src="https://unpkg.com/feather-icons"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   </head>
   <body
   >
+    <!-- Success Overlay -->
+    <div id="success-overlay" class="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center gap-4">
+      <div class="flex items-center justify-center h-24 w-24 rounded-full bg-green-100 border-2 border-green-500">
+        <i data-feather="check" class="w-14 h-14 text-green-600"></i>
+      </div>
+      <h2 class="text-2xl md:text-3xl font-semibold text-green-700">Success!</h2>
+      <p class="text-gray-600">Your details have been submitted.</p>
+    </div>
+
     <div
+      id="thankyou-content"
       class="min-h-screen flex flex-col items-center justify-center gap-6 px-4 space-y-8"
+      style="display:none"
     >
       <img
         src="images/logo_dark.png"
@@ -41,7 +53,7 @@
         class="h-16 w-auto"
       />
 
-      <h1 class="text-4xl md:text-5xl font-bold text-[#0891b2] text-center">
+      <h1 class="text-4xl md:text-5xl font-bold text-[#0891b2] text-center max-w-4xl">
         Thank You for Submitting Your Information!
       </h1>
 
@@ -91,6 +103,45 @@
     <script>
       $(document).ready(function () {
         feather.replace();
+
+        // Confetti celebration then reveal content
+        const durationMs = 2200;
+        const end = Date.now() + durationMs;
+
+        (function frame() {
+          // Burst from left and right
+          confetti({
+            particleCount: 3,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 },
+          });
+          confetti({
+            particleCount: 3,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 },
+          });
+          if (Date.now() < end) {
+            requestAnimationFrame(frame);
+          }
+        })();
+
+        // One big pop in the center
+        confetti({
+          particleCount: 120,
+          startVelocity: 35,
+          spread: 360,
+          origin: { x: 0.5, y: 0.4 },
+        });
+
+        // Reveal content after a short delay and fade out overlay
+        setTimeout(function () {
+          $("#thankyou-content").fadeIn(350);
+          $("#success-overlay").fadeOut(500, function(){
+            $(this).remove();
+          });
+        }, durationMs);
       });
     </script>
   </body>

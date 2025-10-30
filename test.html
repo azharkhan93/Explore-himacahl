@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+<style>
+    .hero {
+        height: 100vh;
+    }
+    .hero__inner {
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+    }
+    .hero__image-cont {
+        position: relative;
+        overflow: hidden;
+    }
+    .hero__image-cont:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        right: 0px;
+        background-color: #111111;
+        height: 100%;
+        top: 0;
+        width: 2.5px;
+        z-index: 999;
+    }
+    .hero__image-cont img,
+    .hero__image-cont .anim-swipe {
+        position: absolute;
+        width: 700%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        object-fit: cover;
+    }
+    .anim-swipe {
+        width: 100%;
+        background-color: #111111;
+    }
+    .hero__image-cont:nth-child(1) img { left: -100%; }
+    .hero__image-cont:nth-child(2) img { left: -200%; }
+    .hero__image-cont:nth-child(3) img { left: -300%; }
+    .hero__image-cont:nth-child(4) img { left: -400%; }
+    .hero__image-cont:nth-child(5) img { left: -500%; }
+    .hero__image-cont:nth-child(6) img { left: -600%; }
+
+    .spacer {
+        height: 300vh;
+    }
+
+    .scroll {
+        position: fixed;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 999;
+    }
+</style>
+<body>
+    <div id="wrapper">
+        <div id="content">
+       
+         <section class="hero">
+          <div class="hero__inner constrain">
+           <div class="hero__image-cont">
+            <img src="https://assets.codepen.io/756881/dawid-zawila-TN8inGqMH7k-unsplash.jpg" />
+            <div class="anim-swipe"></div>
+           </div>
+           <div class="hero__image-cont">
+            <img src="https://assets.codepen.io/756881/dawid-zawila-TN8inGqMH7k-unsplash.jpg" />
+            <div class="anim-swipe"></div>
+           </div>
+           <div class="hero__image-cont">
+            <img src="https://assets.codepen.io/756881/dawid-zawila-TN8inGqMH7k-unsplash.jpg" />
+            <div class="anim-swipe"></div>
+           </div>
+           <div class="hero__image-cont">
+            <img src="https://assets.codepen.io/756881/dawid-zawila-TN8inGqMH7k-unsplash.jpg" />
+            <div class="anim-swipe"></div>
+           </div>
+           <div class="hero__image-cont">
+            <img src="https://assets.codepen.io/756881/dawid-zawila-TN8inGqMH7k-unsplash.jpg" />
+            <div class="anim-swipe"></div>
+           </div>
+           <div class="hero__image-cont">
+            <img src="https://assets.codepen.io/756881/dawid-zawila-TN8inGqMH7k-unsplash.jpg" />
+            <div class="anim-swipe"></div>
+           </div>
+          </div>
+         </section>
+       
+         <section class="spacer">
+         </section>
+        </div>
+       </div>
+       
+       <img class="scroll" srcset="https://img.icons8.com/glyph-neue/128/ffffff/circled-down-2.png 2x" alt="scroll down_64x64" loading="lazy">
+
+       <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+       <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+       <script>
+       gsap.registerPlugin(ScrollTrigger);
+
+       gsap.to(".anim-swipe", {
+         yPercent: 300,
+         delay: 0.2,
+         duration: 3,
+         stagger: {
+           from: "random",
+           each: 0.1
+         },
+         ease: "sine.out"
+       });
+
+       gsap.to(".hero__image-cont > img", {
+         scale: 1.5,
+         xPercent: 20,
+         scrollTrigger: {
+           trigger: ".hero",
+           start: "top top",
+           end: "+=3000px",
+           scrub: true
+         }
+       });
+       </script>
+</body>
+</html>
+
+
