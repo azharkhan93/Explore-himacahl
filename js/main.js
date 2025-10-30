@@ -8,8 +8,74 @@ const EMAILJS_PUBLIC_KEY = "st7TIIV_ztcXD_aif";
   emailjs.init(EMAILJS_PUBLIC_KEY);
 })();
 
+// Ensure YouTube background video autoplays on mobile and desktop
+function initHeroBackgroundVideo() {
+  const iframe = document.querySelector('#home iframe');
+  if (!iframe) return;
+
+  // Make sure required params are present and set correct origin
+  try {
+    const url = new URL(iframe.src);
+    url.searchParams.set('autoplay', '1');
+    url.searchParams.set('mute', '1');
+    url.searchParams.set('playsinline', '1');
+    url.searchParams.set('enablejsapi', '1');
+    url.searchParams.set('loop', '1');
+    url.searchParams.set('rel', '0');
+    url.searchParams.set('modestbranding', '1');
+    url.searchParams.set('origin', window.location.origin);
+    // Reload only if we changed something
+    if (iframe.src !== url.toString()) {
+      iframe.src = url.toString();
+    }
+  } catch (e) {
+    console.warn('Could not normalize YouTube URL', e);
+  }
+
+  const sendCommand = (func, args = []) => {
+    try {
+      if (iframe && iframe.contentWindow) {
+        iframe.contentWindow.postMessage(
+          JSON.stringify({ event: 'command', func, args }),
+          '*'
+        );
+      }
+    } catch {}
+  };
+
+  const play = () => {
+    sendCommand('mute');
+    sendCommand('playVideo');
+  };
+
+  // Try to play once the iframe finishes loading
+  iframe.addEventListener('load', () => {
+    setTimeout(play, 200);
+  });
+
+  // iOS often requires a user gesture; use first touch to start
+  document.addEventListener(
+    'touchstart',
+    () => {
+      play();
+    },
+    { once: true }
+  );
+
+  // Resume when tab becomes active; pause when hidden
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      sendCommand('pauseVideo');
+    } else {
+      play();
+    }
+  });
+}
+
 $(document).ready(function () {
   feather.replace();
+  // Initialize background video autoplay on all devices
+  initHeroBackgroundVideo();
 
   // ========================================
   // GSAP Hero Section Animations
