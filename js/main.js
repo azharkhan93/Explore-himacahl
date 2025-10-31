@@ -8,54 +8,52 @@ const EMAILJS_PUBLIC_KEY = "st7TIIV_ztcXD_aif";
   emailjs.init(EMAILJS_PUBLIC_KEY);
 })();
 
-// Ensure YouTube background video autoplays on mobile and desktop
 function initHeroBackgroundVideo() {
-  const iframe = document.querySelector('#home iframe');
+  const iframe = document.querySelector("#home iframe");
   if (!iframe) return;
 
-  // Make sure required params are present and set correct origin
   try {
     const url = new URL(iframe.src);
-    url.searchParams.set('autoplay', '1');
-    url.searchParams.set('mute', '1');
-    url.searchParams.set('playsinline', '1');
-    url.searchParams.set('enablejsapi', '1');
-    url.searchParams.set('loop', '1');
-    url.searchParams.set('rel', '0');
-    url.searchParams.set('modestbranding', '1');
-    url.searchParams.set('origin', window.location.origin);
+    url.searchParams.set("autoplay", "1");
+    url.searchParams.set("mute", "1");
+    url.searchParams.set("playsinline", "1");
+    url.searchParams.set("enablejsapi", "1");
+    url.searchParams.set("loop", "1");
+    url.searchParams.set("rel", "0");
+    url.searchParams.set("modestbranding", "1");
+    url.searchParams.set("origin", window.location.origin);
     // Reload only if we changed something
     if (iframe.src !== url.toString()) {
       iframe.src = url.toString();
     }
   } catch (e) {
-    console.warn('Could not normalize YouTube URL', e);
+    console.warn("Could not normalize YouTube URL", e);
   }
 
   const sendCommand = (func, args = []) => {
     try {
       if (iframe && iframe.contentWindow) {
         iframe.contentWindow.postMessage(
-          JSON.stringify({ event: 'command', func, args }),
-          '*'
+          JSON.stringify({ event: "command", func, args }),
+          "*"
         );
       }
     } catch {}
   };
 
   const play = () => {
-    sendCommand('mute');
-    sendCommand('playVideo');
+    sendCommand("mute");
+    sendCommand("playVideo");
   };
 
   // Try to play once the iframe finishes loading
-  iframe.addEventListener('load', () => {
+  iframe.addEventListener("load", () => {
     setTimeout(play, 200);
   });
 
   // iOS often requires a user gesture; use first touch to start
   document.addEventListener(
-    'touchstart',
+    "touchstart",
     () => {
       play();
     },
@@ -63,9 +61,9 @@ function initHeroBackgroundVideo() {
   );
 
   // Resume when tab becomes active; pause when hidden
-  document.addEventListener('visibilitychange', () => {
+  document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
-      sendCommand('pauseVideo');
+      sendCommand("pauseVideo");
     } else {
       play();
     }
@@ -74,7 +72,7 @@ function initHeroBackgroundVideo() {
 
 $(document).ready(function () {
   feather.replace();
-  // Initialize background video autoplay on all devices
+
   initHeroBackgroundVideo();
 
   // ========================================
@@ -83,7 +81,6 @@ $(document).ready(function () {
 
   gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
-  // Hero Animation Configuration
   const heroConfig = {
     selectors: {
       title: "#hero-title",
@@ -105,20 +102,19 @@ $(document).ready(function () {
     },
   };
 
-  // Split text into animated characters
   const splitTextIntoChars = (element) => {
     const words = element.textContent.trim().split(/\s+/);
     element.innerHTML = words
-      .map((word) =>
-        `<span class="word">${word
-          .split("")
-          .map((char) => `<span class="char">${char}</span>`)
-          .join("")}</span>`
+      .map(
+        (word) =>
+          `<span class="word">${word
+            .split("")
+            .map((char) => `<span class="char">${char}</span>`)
+            .join("")}</span>`
       )
       .join(" ");
   };
 
-  // Create button interactions
   const initButtonInteractions = (buttons) => {
     const interactions = {
       mouseenter: { scale: 1.08, duration: 0.4, ease: "power2.out" },
@@ -143,7 +139,6 @@ $(document).ready(function () {
     });
   };
 
-  // Initialize hero animations
   setTimeout(() => {
     const { title, description, buttons } = heroConfig.selectors;
     const titleEl = document.querySelector(title);
@@ -189,7 +184,6 @@ $(document).ready(function () {
         "-=0.6"
       )
 
-      // Buttons animation
       .to(
         buttons,
         {
@@ -212,7 +206,6 @@ $(document).ready(function () {
         "-=0.4"
       )
 
-      // Glow effects
       .to(
         `${buttons}:first-of-type`,
         {
@@ -243,11 +236,10 @@ $(document).ready(function () {
   // End of GSAP Animations
   // ========================================
 
-  // Initialize Owl Carousel
   var owl = $(".owl-carousel").owlCarousel({
     loop: true,
     margin: 20,
-    nav: false, // Disable default navigation
+    nav: false,
     dots: false,
     autoplay: true,
     autoplayTimeout: 5000,
@@ -321,14 +313,14 @@ $(document).ready(function () {
     const { open } = modalConfig.animations;
 
     $(modal).removeClass("hidden").addClass("modal-visible");
-    
+
     // Add initial-show class for darker overlay on first load
     if (isInitialShow) {
       $(modal).addClass("initial-show");
     } else {
       $(modal).removeClass("initial-show");
     }
-    
+
     $("body").css("overflow", "hidden");
 
     // Create animation timeline with delays
@@ -421,7 +413,10 @@ $(document).ready(function () {
           duration: close.duration * 0.8,
           ease: close.ease,
           onComplete: () => {
-            $(modal).addClass("hidden").removeClass("modal-visible").removeClass("initial-show");
+            $(modal)
+              .addClass("hidden")
+              .removeClass("modal-visible")
+              .removeClass("initial-show");
             $("body").css("overflow", "auto");
             resetModalElements();
             resetForm(formConfigs.tripForm);
@@ -466,36 +461,35 @@ $(document).ready(function () {
   // ========================================
   // Auto Show Modal on Page Load & Recurring
   // ========================================
-  
+
   let autoModalInterval;
-  
+
   function showAutoModal() {
-    // Check if modal is not already open
+    
     if (!$("#tripModal").hasClass("modal-visible")) {
       formSubmissionSource = "Auto Pop-up";
       resetModalElements();
       openModal(true);
     }
   }
-  
+
   function initAutoModalSystem() {
-    // Show modal immediately on page load (after 2 seconds for smooth UX)
+   
     setTimeout(() => {
       showAutoModal();
+
       
-      // Start recurring modal every 2 minutes after first show
       autoModalInterval = setInterval(() => {
         showAutoModal();
       }, 240000); // 4 minutes = 240000ms
-      
     }, 6000); // 6 seconds initial delay
   }
-  
+
   // Start auto-modal system
   initAutoModalSystem();
-  
+
   // Clear interval when page unloads
-  $(window).on('beforeunload', function() {
+  $(window).on("beforeunload", function () {
     if (autoModalInterval) {
       clearInterval(autoModalInterval);
     }
@@ -990,7 +984,7 @@ $(document).ready(function () {
 
   // Initialize gallery animations
   initGalleryAnimations();
-  
+
   // ========================================
   // Mobile Navbar with GSAP Animations
   // ========================================
@@ -1001,7 +995,6 @@ $(document).ready(function () {
 
     if (!$openBtn.length || !$overlay.length) return;
 
-    // Prepare initial states
     gsap.set($overlay, { opacity: 0 });
     gsap.set(linkSelector, { y: 20, opacity: 0 });
 
@@ -1015,21 +1008,19 @@ $(document).ready(function () {
       $openBtn.attr("aria-expanded", "true");
       $("body").css("overflow", "hidden");
 
-      // Animate overlay and links in
+      n;
       openTl = gsap.timeline();
-      openTl
-        .to($overlay, { opacity: 1, duration: 0.3, ease: "power2.out" })
-        .to(
-          linkSelector,
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.4,
-            ease: "power3.out",
-            stagger: 0.08,
-          },
-          "-=0.1"
-        );
+      openTl.to($overlay, { opacity: 1, duration: 0.3, ease: "power2.out" }).to(
+        linkSelector,
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.4,
+          ease: "power3.out",
+          stagger: 0.08,
+        },
+        "-=0.1"
+      );
     }
 
     function closeMobileNav() {
@@ -1054,7 +1045,11 @@ $(document).ready(function () {
           ease: "power2.in",
           stagger: { amount: 0.12, from: "end" },
         })
-        .to($overlay, { opacity: 0, duration: 0.25, ease: "power2.in" }, "-=0.05");
+        .to(
+          $overlay,
+          { opacity: 0, duration: 0.25, ease: "power2.in" },
+          "-=0.05"
+        );
     }
 
     // Event bindings
