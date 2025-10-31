@@ -1008,7 +1008,7 @@ $(document).ready(function () {
       $openBtn.attr("aria-expanded", "true");
       $("body").css("overflow", "hidden");
 
-      n;
+      // Animate overlay and links in
       openTl = gsap.timeline();
       openTl.to($overlay, { opacity: 1, duration: 0.3, ease: "power2.out" }).to(
         linkSelector,
