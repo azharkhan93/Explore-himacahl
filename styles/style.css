@@ -11,7 +11,7 @@ body {
   font-family: "Josefin Sans", sans-serif;
 }
 
-/* Hero Section Animation Styles */
+
 #hero-title {
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -272,4 +272,24 @@ body {
   .lb-outerContainer {
     margin-top: 161px !important;
   }
+}
+
+@keyframes pulse-wave-blue {
+  0% {
+    box-shadow: rgba(59, 130, 246, 0) 0px 0px 0px 0px;
+  }
+  50% {
+    box-shadow: rgba(59, 130, 246, 0.4) 0px 0px 0px 4px;
+  }
+  100% {
+    box-shadow: rgba(59, 130, 246, 0) 0px 0px 0px 8px;
+  }
+}
+
+.wave-glow-blue {
+  animation: pulse-wave-blue 1.5s ease-out infinite;
+}
+
+.wave-glow-blue-delayed {
+  animation: pulse-wave-blue 1.5s ease-out infinite 0.2s;
 }
