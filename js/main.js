@@ -3,10 +3,47 @@
 const EMAILJS_SERVICE_ID = "service_wzfo9df";
 const EMAILJS_TEMPLATE_ID = "template_toqo3u6";
 const EMAILJS_PUBLIC_KEY = "st7TIIV_ztcXD_aif";
+const SUBJECT_PREFIX = "ExploreHimachal Tour Package - ";
 
 (function () {
-  emailjs.init(EMAILJS_PUBLIC_KEY);
+  try {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+  } catch (error) {
+    console.error("Failed to initialize EmailJS", error);
+  }
 })();
+
+function determineEmailSubject(
+  formElement,
+  submissionSource = null,
+  fallbackSubject = null
+) {
+  const defaultSubject =
+    fallbackSubject || `${SUBJECT_PREFIX}Contact Form Inquiry`;
+
+  const formSubjectMap = {
+    tripForm: `${SUBJECT_PREFIX}Booking Modal Form`,
+    contactForm: `${SUBJECT_PREFIX}Main Contact Form`,
+  };
+
+  const submissionSourceMap = {
+    "Banner Form": `${SUBJECT_PREFIX}Hero Banner Lead`,
+    "Package Booking - Enquiry": `${SUBJECT_PREFIX}Package Enquiry`,
+    "Callback Request": `${SUBJECT_PREFIX}Callback Request`,
+    "Auto Pop-up": `${SUBJECT_PREFIX}Auto Popup Lead`,
+    "Website Contact Form": `${SUBJECT_PREFIX}Website Contact Form`,
+  };
+
+  if (formElement && formSubjectMap[formElement.id]) {
+    return formSubjectMap[formElement.id];
+  }
+
+  if (submissionSource && submissionSourceMap[submissionSource]) {
+    return submissionSourceMap[submissionSource];
+  }
+
+  return defaultSubject;
+}
 
 function initHeroBackgroundVideo() {
   const iframe = document.querySelector("#home iframe");
@@ -465,7 +502,6 @@ $(document).ready(function () {
   let autoModalInterval;
 
   function showAutoModal() {
-    
     if (!$("#tripModal").hasClass("modal-visible")) {
       formSubmissionSource = "Auto Pop-up";
       resetModalElements();
@@ -474,11 +510,9 @@ $(document).ready(function () {
   }
 
   function initAutoModalSystem() {
-   
     setTimeout(() => {
       showAutoModal();
 
-      
       autoModalInterval = setInterval(() => {
         showAutoModal();
       }, 240000); // 4 minutes = 240000ms
@@ -589,23 +623,27 @@ $(document).ready(function () {
         // Show loading state
         showLoadingState(config);
 
-        // Determine subject based on form source or default
-        // For contactForm, always use its default subject; for tripForm (modal), use tracked source
-        const subject =
+        const formElement = this;
+        const submissionSource =
           config === formConfigs.contactForm
-            ? config.defaultSubject
-            : formSubmissionSource ||
-              config.defaultSubject ||
-              "Form Submission";
+            ? "Website Contact Form"
+            : formSubmissionSource;
+        const fallbackSubject =
+          config.defaultSubject || `${SUBJECT_PREFIX}Website Contact Form`;
+        const subject = determineEmailSubject(
+          formElement,
+          submissionSource,
+          fallbackSubject
+        );
 
-        // Prepare email parameters
         const emailParams = {
           from_name: formData.firstName,
           from_email: formData.email,
           phone: formData.phone,
           message: formData.tripDetails,
-          to_name: "gR Travel Team",
+          to_name: "ExploreHimachal Team",
           subject: subject,
+          title: subject,
         };
 
         // Send email using EmailJS with try-catch
